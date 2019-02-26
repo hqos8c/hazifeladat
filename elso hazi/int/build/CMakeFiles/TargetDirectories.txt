@@ -1,0 +1,9 @@
+D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/NightlyMemoryCheck.dir
+D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/Experimental.dir
+D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/Continuous.dir
+D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/Nightly.dir
+D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/int.dir
+D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/PACKAGE.dir
+D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/RUN_TESTS.dir
+D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/ALL_BUILD.dir
+D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/ZERO_CHECK.dir
