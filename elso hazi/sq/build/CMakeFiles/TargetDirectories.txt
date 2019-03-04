@@ -1,9 +1,34 @@
-D:/Bence/aa c++/feladatok/rendes/sq/build/CMakeFiles/NightlyMemoryCheck.dir
-D:/Bence/aa c++/feladatok/rendes/sq/build/CMakeFiles/Experimental.dir
-D:/Bence/aa c++/feladatok/rendes/sq/build/CMakeFiles/Continuous.dir
-D:/Bence/aa c++/feladatok/rendes/sq/build/CMakeFiles/Nightly.dir
-D:/Bence/aa c++/feladatok/rendes/sq/build/CMakeFiles/sq.dir
-D:/Bence/aa c++/feladatok/rendes/sq/build/CMakeFiles/PACKAGE.dir
-D:/Bence/aa c++/feladatok/rendes/sq/build/CMakeFiles/RUN_TESTS.dir
-D:/Bence/aa c++/feladatok/rendes/sq/build/CMakeFiles/ALL_BUILD.dir
-D:/Bence/aa c++/feladatok/rendes/sq/build/CMakeFiles/ZERO_CHECK.dir
+D:/Halprog/sq/build/CMakeFiles/NightlyMemoryCheck.dir
+D:/Halprog/sq/build/CMakeFiles/Experimental.dir
+D:/Halprog/sq/build/CMakeFiles/ContinuousSubmit.dir
+D:/Halprog/sq/build/CMakeFiles/ContinuousConfigure.dir
+D:/Halprog/sq/build/CMakeFiles/NightlyTest.dir
+D:/Halprog/sq/build/CMakeFiles/NightlyStart.dir
+D:/Halprog/sq/build/CMakeFiles/NightlyBuild.dir
+D:/Halprog/sq/build/CMakeFiles/NightlySubmit.dir
+D:/Halprog/sq/build/CMakeFiles/NightlyConfigure.dir
+D:/Halprog/sq/build/CMakeFiles/ContinuousTest.dir
+D:/Halprog/sq/build/CMakeFiles/Continuous.dir
+D:/Halprog/sq/build/CMakeFiles/Nightly.dir
+D:/Halprog/sq/build/CMakeFiles/NightlyUpdate.dir
+D:/Halprog/sq/build/CMakeFiles/NightlyCoverage.dir
+D:/Halprog/sq/build/CMakeFiles/package_source.dir
+D:/Halprog/sq/build/CMakeFiles/NightlyMemCheck.dir
+D:/Halprog/sq/build/CMakeFiles/ExperimentalStart.dir
+D:/Halprog/sq/build/CMakeFiles/ExperimentalUpdate.dir
+D:/Halprog/sq/build/CMakeFiles/ExperimentalConfigure.dir
+D:/Halprog/sq/build/CMakeFiles/ExperimentalBuild.dir
+D:/Halprog/sq/build/CMakeFiles/ExperimentalTest.dir
+D:/Halprog/sq/build/CMakeFiles/ExperimentalCoverage.dir
+D:/Halprog/sq/build/CMakeFiles/ExperimentalMemCheck.dir
+D:/Halprog/sq/build/CMakeFiles/ExperimentalSubmit.dir
+D:/Halprog/sq/build/CMakeFiles/ContinuousBuild.dir
+D:/Halprog/sq/build/CMakeFiles/ContinuousStart.dir
+D:/Halprog/sq/build/CMakeFiles/package.dir
+D:/Halprog/sq/build/CMakeFiles/ContinuousUpdate.dir
+D:/Halprog/sq/build/CMakeFiles/ContinuousCoverage.dir
+D:/Halprog/sq/build/CMakeFiles/ContinuousMemCheck.dir
+D:/Halprog/sq/build/CMakeFiles/sq.dir
+D:/Halprog/sq/build/CMakeFiles/test.dir
+D:/Halprog/sq/build/CMakeFiles/edit_cache.dir
+D:/Halprog/sq/build/CMakeFiles/rebuild_cache.dir
