@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="D:\Bence\aa c++\feladatok\rendes\int\build\CMakeFiles\9854713e8f934baebda11a302d29ee78\Nightly.rule">
+    <CustomBuild Include="D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\CMakeFiles\75346d5c4024f086f292edc1455359b3\Nightly.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="D:\Bence\aa c++\feladatok\rendes\int\CMakeLists.txt" />
+    <CustomBuild Include="D:\Bence\aa c++\feladatok\rendes\elso hazi\int\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="D:\Bence\aa c++\feladatok\rendes\int\build\CMakeFiles\Nightly" />
+    <None Include="D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\CMakeFiles\Nightly" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{A07E5CAC-3DF6-3040-B924-FEB7E037AC83}</UniqueIdentifier>
+      <UniqueIdentifier>{D810A28B-6B39-3233-B4D0-4A86C6FCC58A}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

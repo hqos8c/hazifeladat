@@ -4,17 +4,17 @@
 
 
 # Configuration directories and files
-SourceDirectory: D:/Halprog/int
-BuildDirectory: D:/Halprog/int/build
+SourceDirectory: D:/Bence/aa c++/feladatok/rendes/elso hazi/int
+BuildDirectory: D:/Bence/aa c++/feladatok/rendes/elso hazi/int/build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: DESKTOP-JCDJQG2
+Site: ASUS
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Win32-ninja
+BuildName: Win32-MSBuild
 
 # Subprojects
 LabelsForSubprojects: 
@@ -36,7 +36,7 @@ ScpCommand: SCPCOMMAND-NOTFOUND
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe" "D:/Halprog/int"
+ConfigureCommand: "C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe" "D:/Bence/aa c++/feladatok/rendes/elso hazi/int"
 MakeCommand: "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
@@ -104,7 +104,7 @@ TimeOut: 1500
 # so would cause the system load to exceed this value.
 TestLoad: 
 
-UseLaunchers: 
+UseLaunchers: 0
 CurlOptions: 
 # warning, if you add new options here that have to do with submit,
 # you have to update cmCTestSubmitCommand.cxx

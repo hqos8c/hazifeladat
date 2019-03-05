@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3F3E7B5F-ECFC-308F-8BB5-4714904C87A8}</ProjectGuid>
+    <ProjectGuid>{D1DBEC0D-C24D-3B55-8C3C-22650DC2FE07}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -73,7 +73,7 @@
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-cd "D:\Bence\aa c++\feladatok\rendes\int\build"
+cd "D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build"
 if %errorlevel% neq 0 goto :cmEnd
 D:
 if %errorlevel% neq 0 goto :cmEnd
@@ -99,7 +99,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-cd "D:\Bence\aa c++\feladatok\rendes\int\build"
+cd "D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build"
 if %errorlevel% neq 0 goto :cmEnd
 D:
 if %errorlevel% neq 0 goto :cmEnd
@@ -125,7 +125,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-cd "D:\Bence\aa c++\feladatok\rendes\int\build"
+cd "D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build"
 if %errorlevel% neq 0 goto :cmEnd
 D:
 if %errorlevel% neq 0 goto :cmEnd
@@ -151,7 +151,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-cd "D:\Bence\aa c++\feladatok\rendes\int\build"
+cd "D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build"
 if %errorlevel% neq 0 goto :cmEnd
 D:
 if %errorlevel% neq 0 goto :cmEnd
@@ -166,7 +166,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\Bence\aa c++\feladatok\rendes\int\build\CMakeFiles\9854713e8f934baebda11a302d29ee78\PACKAGE_force.rule">
+    <CustomBuild Include="D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\CMakeFiles\75346d5c4024f086f292edc1455359b3\PACKAGE_force.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> </Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 cd .
@@ -177,8 +177,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/9854713e8f934baebda11a302d29ee78/PACKAGE_force.rule;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Bence\aa c++\feladatok\rendes\int\build\CMakeFiles\PACKAGE_force</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Bence/aa c++/feladatok/rendes/elso hazi/int/build/CMakeFiles/75346d5c4024f086f292edc1455359b3/PACKAGE_force.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\CMakeFiles\PACKAGE_force</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"> </Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
@@ -190,8 +190,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/9854713e8f934baebda11a302d29ee78/PACKAGE_force.rule;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Bence\aa c++\feladatok\rendes\int\build\CMakeFiles\PACKAGE_force</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Bence/aa c++/feladatok/rendes/elso hazi/int/build/CMakeFiles/75346d5c4024f086f292edc1455359b3/PACKAGE_force.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\CMakeFiles\PACKAGE_force</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"> </Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
@@ -203,8 +203,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/9854713e8f934baebda11a302d29ee78/PACKAGE_force.rule;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Bence\aa c++\feladatok\rendes\int\build\CMakeFiles\PACKAGE_force</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Bence/aa c++/feladatok/rendes/elso hazi/int/build/CMakeFiles/75346d5c4024f086f292edc1455359b3/PACKAGE_force.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\CMakeFiles\PACKAGE_force</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"> </Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
@@ -216,18 +216,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Bence/aa c++/feladatok/rendes/int/build/CMakeFiles/9854713e8f934baebda11a302d29ee78/PACKAGE_force.rule;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Bence\aa c++\feladatok\rendes\int\build\CMakeFiles\PACKAGE_force</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Bence/aa c++/feladatok/rendes/elso hazi/int/build/CMakeFiles/75346d5c4024f086f292edc1455359b3/PACKAGE_force.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\CMakeFiles\PACKAGE_force</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\Bence\aa c++\feladatok\rendes\int\build\ZERO_CHECK.vcxproj">
-      <Project>{BBAADF72-23BF-3303-83E9-A26ECCC8DB2E}</Project>
+    <ProjectReference Include="D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\ZERO_CHECK.vcxproj">
+      <Project>{D217AB26-72A2-30DB-8C4D-06180B4C82D6}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Bence\aa c++\feladatok\rendes\int\build\ALL_BUILD.vcxproj">
-      <Project>{5B76F9C5-CCD7-35DB-A181-4D9CF0F9AAA6}</Project>
+    <ProjectReference Include="D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\ALL_BUILD.vcxproj">
+      <Project>{02B6CAB8-103B-3430-A387-AC297AF0300E}</Project>
       <Name>ALL_BUILD</Name>
     </ProjectReference>
   </ItemGroup>

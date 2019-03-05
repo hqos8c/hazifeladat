@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5B76F9C5-CCD7-35DB-A181-4D9CF0F9AAA6}</ProjectGuid>
+    <ProjectGuid>{02B6CAB8-103B-3430-A387-AC297AF0300E}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -104,12 +104,12 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\Bence\aa c++\feladatok\rendes\int\build\ZERO_CHECK.vcxproj">
-      <Project>{BBAADF72-23BF-3303-83E9-A26ECCC8DB2E}</Project>
+    <ProjectReference Include="D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\ZERO_CHECK.vcxproj">
+      <Project>{D217AB26-72A2-30DB-8C4D-06180B4C82D6}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Bence\aa c++\feladatok\rendes\int\build\int.vcxproj">
-      <Project>{3C25FE57-A7DE-3725-8B35-FBEB42C89505}</Project>
+    <ProjectReference Include="D:\Bence\aa c++\feladatok\rendes\elso hazi\int\build\int.vcxproj">
+      <Project>{AEB07481-5464-3DE5-864E-EF350F74CAAC}</Project>
       <Name>int</Name>
     </ProjectReference>
   </ItemGroup>
