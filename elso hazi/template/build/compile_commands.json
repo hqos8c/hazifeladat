@@ -1,0 +1,7 @@
+[
+{
+  "directory": "d:/Halprog/template/build",
+  "command": "C:\\PROGRA~2\\MICROS~2\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.16.27023\\bin\\Hostx86\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /FoCMakeFiles\\template.dir\\main.cpp.obj /FdTARGET_COMPILE_PDB /FS -c D:\\Halprog\\template\\main.cpp",
+  "file": "D:/Halprog/template/main.cpp"
+}
+]
