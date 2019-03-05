@@ -1,16 +1,16 @@
 #include <iostream>
-#include<math.h>
+#include<cmath>
 
-double fv(double x,double n){
-    double x1 = x*x-n;
+double fv(double x,double x0){
+    double x1 = x*x-x0;
     return x1;
 }
 
-double sqrt_newton(double n, double x0){
+double sqrt_newton(double x0, double x){
 
-for(int i = 0; i < n; i++)
+for(int i = 0; i < 100; i++)
     {
-        x0 =x0-(fv(x0,n)/(2*x0));
+        x =x-(fv(x,x0)/(2*x));
     }
 
 return x0;
@@ -18,10 +18,10 @@ return x0;
 }
 
 int main(int, char**) {
-    double x0 = 10;
-    int n = 612;
+    double x = 10;
+    double x0 = 612;
 
-    double x=sqrt_newton(n,x0);
+    double x1=sqrt_newton(x0,x);
 
-    std::cout <<x<<std::endl;
+    std::cout <<x1<<std::endl;
 }
