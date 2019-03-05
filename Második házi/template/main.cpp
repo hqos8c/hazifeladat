@@ -1,7 +1,7 @@
 #include <iostream>
-#include<cmath>
+#include <cmath>
 
-template< typename T,typename K,typename D>
+template< typename K,typename D,typename T>
 T func(K fv1,D fv2,T x0 ){
 
     int n = 5;
