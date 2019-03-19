@@ -10,22 +10,19 @@ array<double,2> frame (vector<double> const& X,vector<double> const& Y){
 
     double xsum = (accumulate(X.begin(),X.end(),0.0)/ X.size());    
     double ysum = (accumulate(Y.begin(),Y.end(),0.0)/ Y.size()); 
-    
-    double b = 0.0;
 
-    for(int i = 0; i < X.size(); i++)
-    {
-        if(X[i]-xsum == 0){
-            cout<< "We have discovered a mathematical problem" << endl;   //ez a lépés csak azért szükséges, hogy ne legyen nan a végeredmény
-            exit(0);
+   for(int i = 0; i < X.size(); i++){
+       if (X[i]-xsum == 0.0) {
+           cout<<"We have a mathematical problem"<<endl;
+           exit(0);
         }
+   }
 
-        else{
-        b = b + ((X[i]-xsum)*(Y[i]-ysum))/((X[i]-xsum)*(X[i]-xsum));    
-        }
-    }
+    auto lambda = [xsum,ysum](double X,double Y) {return ((X-xsum) * (Y-ysum))/((X-xsum)*(X-xsum));};
+    auto sum = [](double X, double Y){return X+Y;};
 
-    double m = ysum - b*xsum;
+    double b = inner_product(X.begin(),X.end(),Y.begin(),0.0,sum,lambda);
+    auto m = ysum - b*xsum;
     
     cout<< b<< endl;
     cout<<m<<endl;
@@ -35,8 +32,8 @@ return {b, m};
 
 int main(int, char**) {
 
-vector<double> X ={1,2};
-vector<double> Y ={2,3};
+vector<double> X ={1,5};
+vector<double> Y ={2,5};
 
 frame(X,Y);
 
