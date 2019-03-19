@@ -48,14 +48,11 @@ template<typename T>
     return Vector2<T>{ a.x- b.x, a.y - b.y};
 }
 
-/*
 template<typename T>
-Vector2<T> operator* (Vector2<T> const& a, Vector2<T> const& b){
-
-    return Vector2<T>{(a.x * b.x) + (a.y * b.y)};
+Vector2<T> operator/(Vector2<T> const& a,T b){
+    return Vector2<T>{a.x/b,a.y/b};
 }
 
-*/
 template<typename T>
 Vector2<T> operator*(Vector2<T> const& a,T b){
     return Vector2<T>{a.x*b,a.y*b};
@@ -79,7 +76,7 @@ T sqlength(Vector2<T> const& v){
 
 template<typename T>
 Vector2<T> normalize(Vector2<T> const& v){
-    T v_length = sqrt(sq(v.x) + sq(v.y));
+    T v_length =length(v);
     return Vector2<T>{v.x/v_length,v.y/v_length};
 }
 
@@ -92,4 +89,17 @@ void printvector(Vector2<T> const& v){
 template<typename T>
 T dot(Vector2<T> const& v,Vector2<T> const& u){
     return v.x*u.x + v.y*u.y;
+}
+
+template<typename T>
+std::ostream& operator<<( std::ostream& o, Vector2<T> const& v ){
+    o << v.x << " " << v.y;
+    return o;
+}
+
+template<typename T>
+std::istream& operator>>( std::istream& i, Vector2<T> const& v ){
+    i >> v.x;
+    i >> v.y;
+return i;
 }

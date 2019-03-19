@@ -1,59 +1,64 @@
 #include <iostream>
-#include"vector2.h"
+#include "vector2.h"
+
+using namespace std;
 
 int main() {
 
-    Vector2<double> v = {1.0,2.0};
-    Vector2<double> u = {1.0,2.0};
-/* 
-    for( int i = 0; i < 1; i++)
+Vector2<double> v = {1.0,2.0};
+Vector2<double> u = {3.0,4.0};
+
+/*
+for( int i = 0; i < 1; i++)
     {
         v +=v;
     }
-    printvector(v);
+cout<<(v)<<endl;
 
 for( int i = 0; i < 2; i++)
     {
         v -=u;
     }
-    printvector(v);
+cout<<(v)<<endl;
 
 for( int i = 0; i < 1; i++)
     {
         v *= 2.0;
     }
-    printvector(v);
+cout<<(v)<<endl;
 
 for( int i = 0; i < 1; i++)
     {
         v /=2.0;
     }
-    printvector(v);
+cout<<(v)<<endl;
 
 Vector2<double> a = v+u;
-printvector(a);
+cout<<(a)<<endl;;
 
 a= v-u;
-printvector(a);
-
+cout<<(a)<<endl;
 
 a = 2.0*v;
-printvector(a);
+cout<<(a)<<endl;
 
 a = v*2.0;
-printvector(a);
+cout<<(a)<<endl;
 
-auto b = length(v);
+a = v/2.0;
+cout<<a<<endl;
+
+auto b = length(u);
 std::cout<<b<<std::endl;
 
-b=sqlength(v);
+b=sqlength(u);
 std::cout<<b<<std::endl;
 
-Vector2<double> c=normalize(v);
-printvector(c);
+Vector2<double> c=normalize(u);
+cout<<c<<endl;
 
 
-double c =dot(v,u);
-std::cout<<c<<std::endl;
+double d =dot(v,u);
+std::cout<<d<<std::endl;
 */
 }
