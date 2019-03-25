@@ -80,11 +80,6 @@ Vector2<T> normalize(Vector2<T> const& v){
     return Vector2<T>{v.x/v_length,v.y/v_length};
 }
 
-template<typename T>
-void printvector(Vector2<T> const& v){
-    std::cout<<v.x<<std::endl;
-    std::cout<<v.y<<std::endl;
-}
 
 template<typename T>
 T dot(Vector2<T> const& v,Vector2<T> const& u){
