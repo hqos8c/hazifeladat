@@ -14,17 +14,17 @@ struct Vector2
     return *this;
     }
 
-    Vector2<T> operator-=(Vector2<T> const& v){
+    Vector2<T>& operator-=(Vector2<T> const& v){
     x -= v.x;   y -= v.y;
     return *this;
     }
 
-    Vector2<T> operator/=(T c){
+    Vector2<T>& operator/=(T c){
     x = x/c;    y = y/c;
     return *this;
     }
 
-    Vector2<T> operator*= (T a){
+    Vector2<T>& operator*= (T a){
     x = x*a; y = y*a;
     return *this;
     }
