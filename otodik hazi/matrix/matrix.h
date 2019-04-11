@@ -30,11 +30,16 @@ template<typename M1, typename M2, typename M3, typename F>
  auto add = [](auto const& x, auto const& y){ return x + y; };
  auto sub = [](auto const& x, auto const& y){ return x - y; };
 
+struct Idx1{};
+struct Idx2{};
+
+
 template<typename T>
 class Matrix
 {
-	public: std::vector<T> data;
-	public:	int N, M;
+	int N, M;
+	std::vector<T> data;
+	public: Matrix(int n,int m,std::vector<T> const& x): N(n), M(m), data(x){}
 
 	public:	T& operator()( int i, int j ) { return data[N*i+j]; }
 	public: T const& operator()( int i, int j ) const { return data[N*i+j]; }
@@ -48,14 +53,33 @@ class Matrix
 
     Matrix<T>& operator=(Matrix const&) = default;
 	Matrix<T>& operator=(Matrix &&) = default;
-
-	Matrix(int n,int m ,std::vector<T> const& x): N(n), M(m), data(x){}
+	
+	template<typename F>
+	Matrix(F f, int n, int m)
+	{
+		N=n;
+		M=m;
+		data.resize(n*m);
+				
+		for(int i=0; i<n*m; i++)
+		{
+			data[i] = f(i);	
+		}
+	}
 
 	template<typename F>
-	Matrix(F f, int n)
+	Matrix(Idx2,F f, int n,int m)
 	{
-		data.resize(n);
-		for(int i=0; i<n; ++i){ data[i] = f(i); }
+		N=n;
+		M=m;
+		data.resize(n*m);
+		for(int i=0; i<3; i++)
+		{
+			for(int j=0; j<3; j++)
+			{
+				data[N*i+j] = f(i,j);	
+			}
+		}
 	}
 
     Matrix<T>& operator+= (Matrix<T> const& cpy)
@@ -81,6 +105,15 @@ class Matrix
 		detail::transform_Matrix1(*this, *this, [=](T const& x){ return x / scl;} );
 		return *this;
     }
+
+	int cols()const
+	{
+		return N;
+	}
+	int rows()const
+	{
+		return M;
+	}
 
 	int size()const
 	{
@@ -111,9 +144,7 @@ class Matrix
     template<typename T>
     Matrix<T> operator+( Matrix<T> const& m1, Matrix<T> const& m2 )
     {
-	Matrix<T> result; result = m1;
-	detail::transform_Matrix2(m1, m2, result, add);
-	return result;    
+	return Matrix<T>([&](int i){return m1[i]+m2[i];},m1.cols(),m1.rows());
 	}
 
     template<typename T>
@@ -140,9 +171,7 @@ class Matrix
     template<typename T>
     Matrix<T> operator-( Matrix<T> const& m1, Matrix<T> const& m2 )
     {
-	Matrix<T> result; result = m1;
-	detail::transform_Matrix2(m1, m2, result, sub);
-	return result;
+	return Matrix<T>([&](int i){return m1[i]-m2[i];},m1.cols(),m1.rows());
     }
 
     template<typename T>
@@ -169,9 +198,7 @@ class Matrix
 	template<typename T>
 	Matrix<T> operator*(Matrix<T> const& m, T const& scl)
 	{
-		Matrix<T> result; result = m;
-		detail::transform_Matrix1(m, result, [=](T const& x){ return x * scl; });
-		return result;
+		return Matrix<T>([&](int i){return m[i]*scl;},m.cols(),m.rows());
 	}
 
 	template<typename T>
@@ -200,9 +227,7 @@ class Matrix
 	template<typename T>
 	Matrix<T> operator/(Matrix<T> const& m, T const& scl)
 	{
-		Matrix<T> result; result = m;
-		detail::transform_Matrix1(m, result, [=](T const& x){ return x / scl; });
-		return result;
+		return Matrix<T>([&](int i){return m[i]/scl;},m.cols(),m.rows());
 	}
 
 	template<typename T>
@@ -215,7 +240,7 @@ class Matrix
 	template<typename T>
 	Matrix<T> operator*(Matrix<T> const& m,Matrix<T> const& n)
 	{
-		Matrix<T> result; result.data.resize(m.data.size());
+		/*Matrix<T> result; result.data.resize(m.data.size());
 		result.M=m.M;
 		result.N = m.N;
 		for(int i = 0; i < m.M; i++)
@@ -230,7 +255,7 @@ class Matrix
 			}
 			
 		}
-	return result;	
+	return result;*/	
 	}
 
 	template<typename T>
