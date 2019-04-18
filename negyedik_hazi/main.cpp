@@ -7,7 +7,8 @@ using namespace std;
 void test(Vector2<double> const& v,Vector2<double> const& v_ref, std::string const& name)
 {
     if (length(v-v_ref) > 1e-10) {
-        cout<<"error in"; cout<<" ";  cout<<name<<endl;
+         cout<<"error in " << name << endl;
+         exit(-1);
     }
     
 }
@@ -84,7 +85,7 @@ int main()
 
 {
     Vector2<double> w = normalize(v);
-    Vector2<double> ell = {3/sqrt(34),5/sqrt(34)};
+    Vector2<double> ell = {0.5144957554275265,0.8574929257125441};
     test(w,ell,"normalize");
 }
 
@@ -94,5 +95,5 @@ int main()
     test_double(w,ref,"dot");
 }
 
-
+std::cout<<"so far so good"<<std::endl;
 }
