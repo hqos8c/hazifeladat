@@ -1,6 +1,6 @@
-#include"matrix.h"
+#include "matrix.h"
 #include <iostream>
-#include<vector>
+#include <vector>
 
 int main()
 {
@@ -8,7 +8,7 @@ int main()
 
     int n = 3;
     std::vector<double> v = {5.0,3.0,1.0,-1.0,-9.0,-11.0,-13.0,15.0,19.0};
-    std::vector<double> u = {0.3,0.3,0.9,-0.11,-0.9,0.1,0.3,0.15,0.17};
+    std::vector<double> u = {0.3,0.3,0.9,-0.11,-0.9,0.1,0.3,0.15,0.17}; 
 {
     Matrix<double>  M;
     if(M.size() != 0) {err("initializer list constructor test [size]");}
@@ -25,6 +25,7 @@ int main()
         ||M(2,0)!=-13.0 ||M(2,1)!=15.0||M(2,2)!=19.0)
     { err("initializer list constructor test indexing");}
 }
+
 
 {
     Matrix<double>  M(n,n,v);
@@ -103,12 +104,21 @@ int main()
 {
     Matrix<double>  M(n,n,v);
     M = std::move(M);
-    if(M.size() != 9) {err("self assignment test [ size]");}
-    if(
-        M(0,0) != 5.0 ||M(0,1)!=3.0||(M(0,2)!=1.0)
-        ||(M(1,0)!=-1.0) ||M(1,1)!=-9.0||M(1,2)!=-11.0
-        ||M(2,0)!=-13.0 ||M(2,1)!=15.0||M(2,2)!=19.0)
-        { err("self assignment test [elements]");}
+    if(M.size() != 0) 
+    {
+        if(M.size() != 9){
+            err("self assignment test [ size]");
+        }
+    }
+    if(M.size() != 0){
+        if(
+            M(0,0) != 5.0 ||M(0,1)!=3.0||(M(0,2)!=1.0)
+            ||(M(1,0)!=-1.0) ||M(1,1)!=-9.0||M(1,2)!=-11.0
+            ||M(2,0)!=-13.0 ||M(2,1)!=15.0||M(2,2)!=19.0)
+            {
+                err("self assignment test [elements]");
+            }
+    }
 }
 
 {
@@ -136,7 +146,9 @@ int main()
         ||res(1,0)-ref(1,0) >1e-15||res(1,1)-ref(1,1) >1e-15||res(1,2)-ref(1,2) >1e-15
         ||res(2,0)-ref(2,0) >1e-15||res(2,1)-ref(2,1) >1e-15||res(2,2)-ref(2,2) >1e-15
     )   {err("operator + (l-value, l-value) test [ res]");}
+
 }
+
 
 {
     Matrix<double>  M(n,n,v);
@@ -346,6 +358,7 @@ int main()
    {err("operator /=  test [ res]");}
 }
 
+
 {
     Matrix<double>  N(n,n,v);
     std::vector<double> ref_1 = {10.0,6.0,2.0,-2.0,-18.0,-22.0,-26.0,30.0,38.0};
@@ -514,6 +527,5 @@ int main()
     Matrix<double>  M(n,n,v);
     std::cout<< M << std::endl;
 }
-
    std::cout<<"so far so good"<<std::endl;
 }
