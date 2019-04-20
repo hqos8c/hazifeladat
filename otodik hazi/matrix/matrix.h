@@ -62,7 +62,7 @@ class Matrix
 		}
 	}
 
-	template<typename F>
+/*	template<typename F>
 	Matrix(Idx2,F f, int n,int m)
 	{
 		N=n; 
@@ -78,7 +78,24 @@ class Matrix
 				}	
 			}
 		}
+	}*/
+template<typename F>
+	Matrix(Idx2,F f, int n,int m)
+	{
+		N=n; 
+		M=m; 
+		data.resize(n*m);
+		
+		for(int i=0;i<m;i++)
+		{
+			for(int k=0;k<n;k++)
+			{
+				data[N*i+k]= f(i,k);
+			}
+		}
 	}
+
+
 
     Matrix<T>& operator+= (Matrix<T> const& cpy)
 	{
@@ -237,13 +254,34 @@ class Matrix
 	template<typename T>
 	Matrix<T> operator*(Matrix<T> const& m,Matrix<T> const& n)
 	{		
-	 	return Matrix<T>(Idx2{},[&](int i,int j,int k){return m(i,j)*n(j,k);},m.cols(),m.rows());
+		auto mylambda = [&](int i, int k)
+		{ 
+			double x = 0.0;
+			for(int j=0;j<m.cols();j++)
+			{
+				x += m(i,j)*n(j,k);
+			}	
+			return x;
+		};
+
+	 		return Matrix<T>(Idx2{},mylambda,m.cols(),m.rows());
 	}
 
 	template<typename T>
 	Matrix<T> operator*(Matrix<T>&& m,Matrix<T> const& n)
 	{
-	Matrix<T> result(Idx2{},[&](int i,int j,int k){return m(i,j)*n(j,k);},m.cols(),m.rows());
+		auto mylambda = [&](int i, int k)
+		{ 
+			double x = 0.0;
+			for(int j=0;j<m.cols();j++)
+			{
+				x += m(i,j)*n(j,k);
+			}	
+			return x;
+		};
+
+
+	Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());
 	m=result;
 	return std::move(m);	
 	}
@@ -251,7 +289,17 @@ class Matrix
 	template<typename T>
 	Matrix<T> operator*(Matrix<T> const& m,Matrix<T>&& n)
 	{
-	Matrix<T> result(Idx2{},[&](int i,int j,int k){return m(i,j)*n(j,k);},m.cols(),m.rows());	
+		auto mylambda = [&](int i, int k)
+		{ 
+			double x = 0.0;
+			for(int j=0;j<m.cols();j++)
+			{
+				x += m(i,j)*n(j,k);
+			}	
+			return x;
+		};
+
+	Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());	
 	n=result;
 	return std::move(n);	
 	}
@@ -259,7 +307,17 @@ class Matrix
 	template<typename T>
 	Matrix<T> operator*(Matrix<T>&& m,Matrix<T>&& n)
 	{
-	Matrix<T> result(Idx2{},[&](int i,int j,int k){return m(i,j)*n(j,k);},m.cols(),m.rows());
+		auto mylambda = [&](int i, int k)
+		{ 
+			double x = 0.0;
+			for(int j=0;j<m.cols();j++)
+			{
+				x += m(i,j)*n(j,k);
+			}	
+			return x;
+		};
+
+	Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());
 	n=result;
 	return std::move(n);	
 	}

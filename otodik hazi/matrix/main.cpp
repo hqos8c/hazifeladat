@@ -1,6 +1,8 @@
 #include "matrix.h"
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <random>
 
 int main()
 {
@@ -527,5 +529,27 @@ int main()
     Matrix<double>  M(n,n,v);
     std::cout<< M << std::endl;
 }
+
    std::cout<<"so far so good"<<std::endl;
+
+
+{
+    std::vector<double> u(9);
+    std::vector<double> v(9);
+    std::random_device rd{};
+    std::mt19937 gen(rd());
+    std::normal_distribution<double> distr(100,20);
+    std::generate(u.begin(),u.end(),[&]{ return distr(gen); });
+    std::generate(v.begin(),v.end(),[&]{ return distr(gen); });
+    
+    Matrix<double> m(3,3,u);
+    Matrix<double> n(3,3,v);
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+    m=m*n;
+    auto t2 = std::chrono::high_resolution_clock::now();
+    double x =(static_cast<std::chrono::duration<double, std::milli>>(t2-t1)).count();
+    std::cout<<x<<std::endl;
+}
+
 }
