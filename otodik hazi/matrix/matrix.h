@@ -37,17 +37,16 @@ class Matrix
 	std::vector<T> data;
 	public: Matrix(int n,int m,std::vector<T> const& x): N(n), M(m), data(x){}
 
-	public:	T& operator()( int i, int j ) { return data[N*i+j]; }
-	public: T const& operator()( int i, int j ) const { return data[N*i+j]; }
-	
-	public:	T& operator[]( int i ) { return data[i]; }
-	public: T const& operator[]( int i ) const { return data[i]; }
+		T& operator()( int i, int j ) { return data[N*i+j]; }
+	 T const& operator()( int i, int j ) const { return data[N*i+j];}
+		T& operator[]( int i ) { return data[i]; }
+	 T const& operator[]( int i ) const { return data[i]; }
 
-    Matrix() = default;
+  Matrix() = default;
 	Matrix( Matrix const& ) = default;
 	Matrix( Matrix && ) = default;
 
-    Matrix<T>& operator=(Matrix const&) = default;
+  Matrix<T>& operator=(Matrix const&) = default;
 	Matrix<T>& operator=(Matrix &&) = default;
 	
 	template<typename F>
@@ -78,8 +77,6 @@ template<typename F>
 			}
 		}
 	}
-
-
 
     Matrix<T>& operator+= (Matrix<T> const& cpy)
 	{
@@ -144,55 +141,128 @@ template<typename F>
     template<typename T>
     Matrix<T> operator+( Matrix<T> const& m1, Matrix<T> const& m2 )
     {
-	return Matrix<T>([&](int i){return m1[i]+m2[i];},m1.cols(),m1.rows());
-	}
+			if(m1.cols() == m2.cols() && m1.rows()==m2.rows())
+			{
+					return Matrix<T>([&](int i){return m1[i]+m2[i];},m1.cols(),m1.rows());
+			}
+			else
+			{
+				std::cout<<"these matrixes cannot be added";
+				exit(-1);
+			}
+			
+		}
 
     template<typename T>
     Matrix<T>&& operator+( Matrix<T>&& m1, Matrix<T> const& m2 )
     {
-	detail::transform_Matrix2(m1, m2, m1, add);
-	return std::move(m1);
+			if(m1.cols() == m2.cols() && m1.rows()==m2.rows())
+			{
+				detail::transform_Matrix2(m1, m2, m1, add);
+				return std::move(m1);
+			}
+			else
+			{
+				std::cout<<"these matrixes cannot be added";
+				exit(-1);
+			}
     }
     
     template<typename T>
     Matrix<T>&& operator+( Matrix<T> const& m1, Matrix<T>&& m2 )
     {
-	detail::transform_Matrix2(m1, m2, m2, add);
-	return std::move(m2);
+			if(m1.cols() == m2.cols() && m1.rows()==m2.rows())
+			{
+				detail::transform_Matrix2(m1, m2, m2, add);
+				return std::move(m2);
+			}
+
+			else
+			{
+				std::cout<<"these matrixes cannot be added";
+				exit(-1);
+			}
+
     }
 
     template<typename T>
     Matrix<T>&& operator+( Matrix<T>&& m1, Matrix<T>&& m2 )
     {
-	detail::transform_Matrix2(m1, m2, m2, add);
-	return std::move(m2);
+	if(m1.cols() == m2.cols() && m1.rows()==m2.rows())
+			{
+				detail::transform_Matrix2(m1, m2, m2, add);
+				return std::move(m2);
+			}
+				else
+			{
+				std::cout<<"these matrixes cannot be added";
+				exit(-1);
+			}
+
     }
 
     template<typename T>
     Matrix<T> operator-( Matrix<T> const& m1, Matrix<T> const& m2 )
     {
-	return Matrix<T>([&](int i){return m1[i]-m2[i];},m1.cols(),m1.rows());
-    }
+			if(m1.cols() == m2.cols() && m1.rows()==m2.rows())
+			{
+			return Matrix<T>([&](int i){return m1[i]-m2[i];},m1.cols(),m1.rows());
+			}
+		else
+			{
+				std::cout<<"these matrixes cannot be substracted";
+				exit(-1);
+			}
+
+		}
 
     template<typename T>
     Matrix<T>&& operator-( Matrix<T>&& m1, Matrix<T> const& m2 )
     {
-	detail::transform_Matrix2(m1, m2, m1, sub);
-	return std::move(m1);
+			if(m1.cols() == m2.cols() && m1.rows()==m2.rows())
+			{
+				detail::transform_Matrix2(m1, m2, m1, sub);
+				return std::move(m1);
+			}
+			else
+			{
+				std::cout<<"these matrixes cannot be substracted";
+				exit(-1);
+			}
+
+
     }
 
     template<typename T>
     Matrix<T>&& operator-( Matrix<T> const& m1, Matrix<T>&& m2 )
     {
-	detail::transform_Matrix2(m1, m2, m2, sub);
-	return std::move(m2);
+			if(m1.cols() == m2.cols() && m1.rows()==m2.rows())
+			{
+				detail::transform_Matrix2(m1, m2, m2, sub);
+				return std::move(m2);
+			}
+
+			else
+			{
+				std::cout<<"these matrixes cannot be substracted";
+				exit(-1);
+			}
+
     }
 
     template<typename T>
     Matrix<T>&& operator-( Matrix<T>&& m1, Matrix<T>&& m2 )
     {
-	detail::transform_Matrix2(m1, m2, m2, sub);
-	return std::move(m2);
+			if(m1.cols() == m2.cols() && m1.rows()==m2.rows())
+			{
+				detail::transform_Matrix2(m1, m2, m2, sub);
+				return std::move(m2);
+			}
+			else
+			{
+			std::cout<<"these matrixes cannot be substracted";
+				exit(-1);
+			}
     }
 	
 	template<typename T>
@@ -237,7 +307,8 @@ template<typename F>
 
 	template<typename T>
 	Matrix<T> operator*(Matrix<T> const& m,Matrix<T> const& n)
-	{		
+	{
+		if(m.cols()==m.rows()){		
 		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
@@ -249,11 +320,20 @@ template<typename F>
 		};
 
 	 		return Matrix<T>(Idx2{},mylambda,m.cols(),m.rows());
+		}
+		else
+		{
+			std::cout<<"these matrixes cannot be multiplied";
+			exit(-1);
+		}
+		
+	
 	}
 
 	template<typename T>
 	Matrix<T> operator*(Matrix<T>&& m,Matrix<T> const& n)
 	{
+		if(m.cols()==m.rows()){
 		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
@@ -265,14 +345,21 @@ template<typename F>
 		};
 
 
-	Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());
-	m=result;
-	return std::move(m);	
+			Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());
+			m=std::move(result);
+			return std::move(m);
+	}	
+	else
+		{
+			std::cout<<"these matrixes cannot be multiplied";
+			exit(-1);
+		}
 	}
 
 	template<typename T>
 	Matrix<T> operator*(Matrix<T> const& m,Matrix<T>&& n)
 	{
+		if(m.cols()==m.rows()){
 		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
@@ -284,13 +371,23 @@ template<typename F>
 		};
 
 	Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());	
-	n=result;
-	return std::move(n);	
+	n=std::move(result);
+	return std::move(n);
+		}	
+			else
+		{
+			std::cout<<"these matrixes cannot be multiplied";
+			exit(-1);
+		}
+
+
 	}
 
 	template<typename T>
 	Matrix<T> operator*(Matrix<T>&& m,Matrix<T>&& n)
 	{
+		if(m.cols()==m.rows())
+		{
 		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
@@ -301,9 +398,15 @@ template<typename F>
 			return x;
 		};
 
-	Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());
-	n=result;
-	return std::move(n);	
+			Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());
+			n=std::move(result);
+			return std::move(n);
+		}	
+			else
+		{
+			std::cout<<"these matrixes cannot be multiplied";
+			exit(-1);
+		}
 	}
 
 
@@ -321,19 +424,6 @@ template<typename F>
 		return s;
 		}
 
-
-	template<typename T>
-	std::ofstream& operator<<( std::ofstream& s, Matrix<T> const& m )
-	{
-		if( s.is_open() )
-
-		{
-		std::copy( m.begin(),m.end(),std::ostream_iterator<T>(output, " ") );
-		}
-
-		else{ std::cout << "Could not open output file\n"; }
-	}
-
 	template<typename T>
 	std::istream& operator>>( std::istream& s, Matrix<T> const& m )
 	{
@@ -343,17 +433,3 @@ template<typename F>
 			}
 			return s;
 	}
-
-	template<typename T>
-	std::ifstream& operator>>( std::ifstream& s, Matrix<T> const& m )
-	{
-		if( s.is_open() )
-		{
-		std::copy( std::istream_iterator<T>(input),
-		std::istream_iterator<T>(),
-		std::back_inserter(m));
-		}
-		else{ std::cout << "Could not open input file\n"; }
-
-	}
-

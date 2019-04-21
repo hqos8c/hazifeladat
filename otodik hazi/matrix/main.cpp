@@ -6,6 +6,8 @@
 #include <istream>
 #include <ostream>
 #include <fstream>
+#include <iterator>
+#include <algorithm>
 
 int main()
 {
@@ -532,33 +534,48 @@ int main()
     Matrix<double>  M(n,n,v);
     std::cout<< M << std::endl;
 }
-
    std::cout<<"so far so good"<<std::endl;
-
-
 {
-     std::ofstream ofile("time.txt");
-    for(int i=0; i<100; i++)
-    {
-    std::vector<double> u(9);
-    std::vector<double> v(9);
-    std::random_device rd{};
-    std::mt19937 gen(rd());
-    std::normal_distribution<double> distr(100,20);
-    std::generate(u.begin(),u.end(),[&]{ return distr(gen); });
-    std::generate(v.begin(),v.end(),[&]{ return distr(gen); });
+    std::ofstream ofile("time.txt");
     
-    Matrix<double> m(3,3,u);
-    Matrix<double> n(3,3,v);
+    for(int j = 2; j<12;j++)
+    {
+        for(int i=0; i<100; i++)
+        {
+            std::vector<double> u(j*j);
+            std::vector<double> v(j*j);
+            std::random_device rd{};
+            std::mt19937 gen(rd());
+            std::normal_distribution<double> distr(100,20);
+            std::generate(u.begin(),u.end(),[&]{ return distr(gen); });
+            std::generate(v.begin(),v.end(),[&]{ return distr(gen); });
 
-    auto t1 = std::chrono::high_resolution_clock::now();
-    m=m*n;
-    auto t2 = std::chrono::high_resolution_clock::now();
-    double x =(static_cast<std::chrono::duration<double, std::milli>>(t2-t1)).count();
+            Matrix<double> m(j,j,u);
+            Matrix<double> n(j,j,v);
 
-    ofile<< x << std::endl;
+            auto t1 = std::chrono::high_resolution_clock::now();
+            m=m*n;
+            auto t2 = std::chrono::high_resolution_clock::now();
+            double x =(static_cast<std::chrono::duration<double, std::milli>>(t2-t1)).count();
+
+            ofile<< x << std::endl;
+        }
     }
+
+
 }
 
+/*    std::vector<double> data;
+    std::ifstream input("time.txt");
+    if( input.is_open() )
+{
+std::copy( std::istream_iterator<double>(input),std::istream_iterator<double>(),std::back_inserter(data) );
+}
+else{ std::cout << "Could not open input file\n"; }
+
+    for(int i=1;i<11;i++)
+    {
+        std::cout<<std::min_element(data[i*100],data[100])<<std::endl;
+    }*/
 
 }
