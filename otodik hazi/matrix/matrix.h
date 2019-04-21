@@ -63,23 +63,6 @@ class Matrix
 		}
 	}
 
-/*	template<typename F>
-	Matrix(Idx2,F f, int n,int m)
-	{
-		N=n; 
-		M=m; 
-		data.resize(n*m);
-		for(int i=0; i<m; i++)
-		{
-			for(int k=0; k<n; k++)
-			{
-				for(int j=0;j<n;j++)
-				{
-					data[N*i+k] += f(i,j,k);
-				}	
-			}
-		}
-	}*/
 template<typename F>
 	Matrix(Idx2,F f, int n,int m)
 	{
@@ -350,22 +333,6 @@ template<typename F>
 
 		else{ std::cout << "Could not open output file\n"; }
 	}
-
-	/*template<typename T>
-	std::istream& operator>>( std::istream& s, Matrix<T> const& m )	
-	{
-		std::string tmp;
-		std::getline(s, tmp);
-		if(tmp.size() > 0)
-		{
-		std::stringstream ss(tmp);
-		for (int i = 0; i < m.size(); i++)
-		{
-		std::getline(ss, tmp, ' '); m[i] = std::stoi(tmp);
-		}
-		}
-		return s; 
-	}*/
 
 	template<typename T>
 	std::istream& operator>>( std::istream& s, Matrix<T> const& m )
