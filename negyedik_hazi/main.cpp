@@ -2,21 +2,21 @@
 #include <string>
 #include "vector2.h"
 
-using namespace std;
+
 
 void test(Vector2<double> const& v,Vector2<double> const& v_ref, std::string const& name)
 {
     if (length(v-v_ref) > 1e-10) {
-         cout<<"error in " << name << endl;
+         std::cout<<"error in " << name << std::endl;
          exit(-1);
     }
     
 }
 
 void test_double(double w, double ref,std::string const& name)
-{
-    if (abs(w-ref) > 1e-10) {
-        cout<<"error in"; cout<<name<<endl;
+{   
+    if (std::abs(w-ref) > 1e-10) {
+        std::cout<<"error in"; std::cout<<name<<std::endl;
     }
 }
 

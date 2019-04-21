@@ -76,8 +76,7 @@ T sqlength(Vector2<T> const& v){
 
 template<typename T>
 Vector2<T> normalize(Vector2<T> const& v){
-    T v_length =length(v);
-    return Vector2<T>{v.x/v_length,v.y/v_length};
+    return v/length(v);
 }
 
 
@@ -92,9 +91,33 @@ std::ostream& operator<<( std::ostream& o, Vector2<T> const& v ){
     return o;
 }
 
+
+template<typename T>
+std::ofstream& operator<<( std::ofstream& s, Vector2<T> const& m )
+{
+	if( s.is_open() )
+	{
+	std::copy( m.begin(),m.end(),std::ostream_iterator<T>(output, " ") );
+	}
+	else{ std::cout << "Could not open output file\n"; }
+}
+
+
 template<typename T>
 std::istream& operator>>( std::istream& i, Vector2<T> const& v ){
     i >> v.x;
     i >> v.y;
 return i;
+}
+
+template<typename T>
+std::ifstream& operator>>( std::ifstream& s, Vector2<T> const& m )
+{
+	if( s.is_open() )
+	{
+	std::copy( std::istream_iterator<T>(input),
+	std::istream_iterator<T>(),
+	std::back_inserter(m));
+	}
+	else{ std::cout << "Could not open input file\n"; }
 }
