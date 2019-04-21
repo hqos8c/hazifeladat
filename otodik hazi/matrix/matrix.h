@@ -5,6 +5,7 @@
 #include <initializer_list>
 #include <cmath>
 #include <ostream>
+#include <istream>
 
 namespace detail
 {
@@ -335,4 +336,57 @@ template<typename F>
 			s<<"\n";
 		}
 		return s;
+		}
+
+
+	template<typename T>
+	std::ofstream& operator<<( std::ofstream& s, Matrix<T> const& m )
+	{
+		if( s.is_open() )
+
+		{
+		std::copy( m.begin(),m.end(),std::ostream_iterator<T>(output, " ") );
+		}
+
+		else{ std::cout << "Could not open output file\n"; }
 	}
+
+	/*template<typename T>
+	std::istream& operator>>( std::istream& s, Matrix<T> const& m )	
+	{
+		std::string tmp;
+		std::getline(s, tmp);
+		if(tmp.size() > 0)
+		{
+		std::stringstream ss(tmp);
+		for (int i = 0; i < m.size(); i++)
+		{
+		std::getline(ss, tmp, ' '); m[i] = std::stoi(tmp);
+		}
+		}
+		return s; 
+	}*/
+
+	template<typename T>
+	std::istream& operator>>( std::istream& s, Matrix<T> const& m )
+	{
+		for (int i = 0; i < m.size(); i++)
+			{
+					s>> m[i];
+			}
+			return s;
+	}
+
+	template<typename T>
+	std::ifstream& operator>>( std::ifstream& s, Matrix<T> const& m )
+	{
+		if( s.is_open() )
+		{
+		std::copy( std::istream_iterator<T>(input),
+		std::istream_iterator<T>(),
+		std::back_inserter(m));
+		}
+		else{ std::cout << "Could not open input file\n"; }
+
+	}
+
