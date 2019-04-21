@@ -3,6 +3,9 @@
 #include <vector>
 #include <chrono>
 #include <random>
+#include <istream>
+#include <ostream>
+#include <fstream>
 
 int main()
 {
@@ -144,9 +147,9 @@ int main()
     if(res.size() != 9) {err("operator + (l-value, l-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-15||res(0,1)-ref(0,1) >1e-15||res(0,2)-ref(0,2) >1e-15
-        ||res(1,0)-ref(1,0) >1e-15||res(1,1)-ref(1,1) >1e-15||res(1,2)-ref(1,2) >1e-15
-        ||res(2,0)-ref(2,0) >1e-15||res(2,1)-ref(2,1) >1e-15||res(2,2)-ref(2,2) >1e-15
+        std::abs(res(0,0)-ref(0,0)) >1e-15||std::abs(res(0,1)-ref(0,1)) >1e-15||std::abs(res(0,2)-ref(0,2)) >1e-15
+        ||std::abs(res(1,0)-ref(1,0)) >1e-15||std::abs(res(1,1)-ref(1,1)) >1e-15||std::abs(res(1,2)-ref(1,2)) >1e-15
+        ||std::abs(res(2,0)-ref(2,0)) >1e-15||std::abs(res(2,1)-ref(2,1)) >1e-15||std::abs(res(2,2)-ref(2,2)) >1e-15
     )   {err("operator + (l-value, l-value) test [ res]");}
 
 }
@@ -168,9 +171,9 @@ int main()
     if(res.size() != 9) {err("operator + (r-value, l-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-15||res(0,1)-ref(0,1) >1e-15||res(0,2)-ref(0,2) >1e-15
-        ||res(1,0)-ref(1,0) >1e-15||res(1,1)-ref(1,1) >1e-15||res(1,2)-ref(1,2) >1e-15
-        ||res(2,0)-ref(2,0) >1e-15||res(2,1)-ref(2,1) >1e-15||res(2,2)-ref(2,2) >1e-15
+        std::abs(res(0,0)-ref(0,0)) >1e-15||std::abs(res(0,1)-ref(0,1)) >1e-15||std::abs(res(0,2)-ref(0,2)) >1e-15
+        ||std::abs(res(1,0)-ref(1,0)) >1e-15||std::abs(res(1,1)-ref(1,1)) >1e-15||std::abs(res(1,2)-ref(1,2)) >1e-15
+        ||std::abs(res(2,0)-ref(2,0)) >1e-15||std::abs(res(2,1)-ref(2,1)) >1e-15||std::abs(res(2,2)-ref(2,2)) >1e-15
     )   {err("operator + (r-value, l-value) test [ res]");}
 }
 
@@ -185,9 +188,9 @@ int main()
     if(res.size() != 9) {err("operator + (l-value, r-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-15||res(0,1)-ref(0,1) >1e-15||res(0,2)-ref(0,2) >1e-15
-        ||res(1,0)-ref(1,0) >1e-15||res(1,1)-ref(1,1) >1e-15||res(1,2)-ref(1,2) >1e-15
-        ||res(2,0)-ref(2,0) >1e-15||res(2,1)-ref(2,1) >1e-15||res(2,2)-ref(2,2) >1e-15
+        std::abs(res(0,0)-ref(0,0)) >1e-15||std::abs(res(0,1)-ref(0,1)) >1e-15||std::abs(res(0,2)-ref(0,2)) >1e-15
+        ||std::abs(res(1,0)-ref(1,0)) >1e-15||std::abs(res(1,1)-ref(1,1)) >1e-15||std::abs(res(1,2)-ref(1,2)) >1e-15
+        ||std::abs(res(2,0)-ref(2,0)) >1e-15||std::abs(res(2,1)-ref(2,1)) >1e-15||std::abs(res(2,2)-ref(2,2)) >1e-15
     )   {err("operator + (l-value, r-value) test [ res]");}
 }
 
@@ -202,9 +205,9 @@ int main()
     if(res.size() != 9) {err("operator + (r-value, r-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-15||res(0,1)-ref(0,1) >1e-15||res(0,2)-ref(0,2) >1e-15
-        ||res(1,0)-ref(1,0) >1e-15||res(1,1)-ref(1,1) >1e-15||res(1,2)-ref(1,2) >1e-15
-        ||res(2,0)-ref(2,0) >1e-15||res(2,1)-ref(2,1) >1e-15||res(2,2)-ref(2,2) >1e-15
+        std::abs(res(0,0)-ref(0,0)) >1e-15||std::abs(res(0,1)-ref(0,1)) >1e-15||std::abs(res(0,2)-ref(0,2)) >1e-15
+        ||std::abs(res(1,0)-ref(1,0)) >1e-15||std::abs(res(1,1)-ref(1,1)) >1e-15||std::abs(res(0,2)-ref(0,2)) >1e-15
+        ||std::abs(res(2,0)-ref(2,0)) >1e-15||std::abs(res(2,1)-ref(2,1)) >1e-15||std::abs(res(2,2)-ref(2,2)) >1e-15
     )   {err("operator + (r-value, r-value) test [ res]");}
 }
 
@@ -229,9 +232,9 @@ int main()
     if(res.size() != 9) {err("operator - (l-value, l-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-15||res(0,1)-ref(0,1) >1e-15||res(0,2)-ref(0,2) >1e-15
-        ||res(1,0)-ref(1,0) >1e-15||res(1,1)-ref(1,1) >1e-15||res(1,2)-ref(1,2) >1e-15
-        ||res(2,0)-ref(2,0) >1e-15||res(2,1)-ref(2,1) >1e-15||res(2,2)-ref(2,2) >1e-15
+        std::abs(res(0,0)-ref(0,0)) >1e-15||std::abs(res(0,1)-ref(0,1)) >1e-15||std::abs(res(0,2)-ref(0,2)) >1e-15
+        ||std::abs(res(1,0)-ref(1,0)) >1e-15||std::abs(res(1,1)-ref(1,1)) >1e-15||std::abs(res(1,2)-ref(1,2)) >1e-15
+        ||std::abs(res(2,0)-ref(2,0)) >1e-15||std::abs(res(2,1)-ref(2,1)) >1e-15||std::abs(res(2,2)-ref(2,2)) >1e-15
     )   {err("operator - (l-value, l-value) test [ res]");}
 }
 
@@ -251,9 +254,9 @@ int main()
     if(res.size() != 9) {err("operator - (r-value, l-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-15||res(0,1)-ref(0,1) >1e-15||res(0,2)-ref(0,2) >1e-15
-        ||res(1,0)-ref(1,0) >1e-15||res(1,1)-ref(1,1) >1e-15||res(1,2)-ref(1,2) >1e-15
-        ||res(2,0)-ref(2,0) >1e-15||res(2,1)-ref(2,1) >1e-15||res(2,2)-ref(2,2) >1e-15
+        std::abs(res(0,0)-ref(0,0)) >1e-15||std::abs(res(0,1)-ref(0,1)) >1e-15||std::abs(res(0,2)-ref(0,2)) >1e-15
+        ||std::abs(res(1,0)-ref(1,0)) >1e-15||std::abs(res(1,1)-ref(1,1)) >1e-15||std::abs(res(1,2)-ref(1,2)) >1e-15
+        ||std::abs(res(2,0)-ref(2,0)) >1e-15||std::abs(res(2,1)-ref(2,1)) >1e-15||std::abs(res(2,2)-ref(2,2)) >1e-15
     )   {err("operator - (r-value, l-value) test [ res]");}
 }
 
@@ -268,9 +271,9 @@ int main()
     if(res.size() != 9) {err("operator - (l-value, r-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-15||res(0,1)-ref(0,1) >1e-15||res(0,2)-ref(0,2) >1e-15
-        ||res(1,0)-ref(1,0) >1e-15||res(1,1)-ref(1,1) >1e-15||res(1,2)-ref(1,2) >1e-15
-        ||res(2,0)-ref(2,0) >1e-15||res(2,1)-ref(2,1) >1e-15||res(2,2)-ref(2,2) >1e-15
+        std::abs(res(0,0)-ref(0,0)) >1e-15||std::abs(res(0,1)-ref(0,1)) >1e-15||std::abs(res(0,2)-ref(0,2)) >1e-15
+        ||std::abs(res(1,0)-ref(1,0)) >1e-15||std::abs(res(1,1)-ref(1,1)) >1e-15||std::abs(res(1,2)-ref(1,2)) >1e-15
+        ||std::abs(res(2,0)-ref(2,0)) >1e-15||std::abs(res(2,1)-ref(2,1)) >1e-15||std::abs(res(2,2)-ref(2,2)) >1e-15
     )   {err("operator - (l-value, r-value) test [ res]");}
 
 }
@@ -286,9 +289,9 @@ int main()
     if(res.size() != 9) {err("operator - (r-value, r-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-15||res(0,1)-ref(0,1) >1e-15||res(0,2)-ref(0,2) >1e-15
-        ||res(1,0)-ref(1,0) >1e-15||res(1,1)-ref(1,1) >1e-15||res(1,2)-ref(1,2) >1e-15
-        ||res(2,0)-ref(2,0) >1e-15||res(2,1)-ref(2,1) >1e-15||res(2,2)-ref(2,2) >1e-15
+        std::abs(res(0,0)-ref(0,0)) >1e-15||std::abs(res(0,1)-ref(0,1)) >1e-15||std::abs(res(0,2)-ref(0,2)) >1e-15
+        ||std::abs(res(1,0)-ref(1,0)) >1e-15||std::abs(res(1,1)-ref(1,1)) >1e-15||std::abs(res(1,2)-ref(1,2)) >1e-15
+        ||std::abs(res(2,0)-ref(2,0)) >1e-15||std::abs(res(2,1)-ref(2,1)) >1e-15||std::abs(res(2,2)-ref(2,2)) >1e-15
     )   {err("operator - (r-value, r-value) test [ res]");}
 }
 
@@ -459,9 +462,9 @@ int main()
     if(res.size() != 9) {err("operator *[matrix] (l-value, l-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-10||res(0,1)-ref(0,1) >1e-10||res(0,2)-ref(0,2) >1e-10
-        ||res(1,0)-ref(1,0) >1e-10||res(1,1)-ref(1,1) >1e-10||res(1,2)-ref(1,2) >1e-10
-        ||res(2,0)-ref(2,0) >1e-10||res(2,1)-ref(2,1) >1e-10||res(2,2)-ref(2,2) >1e-10
+        std::abs(res(0,0)-ref(0,0)) >1e-10||std::abs(res(0,1)-ref(0,1)) >1e-10||std::abs(res(0,2)-ref(0,2)) >1e-10
+        ||std::abs(res(1,0)-ref(1,0)) >1e-10||std::abs(res(1,1)-ref(1,1)) >1e-10||std::abs(res(1,2)-ref(1,2)) >1e-10
+        ||std::abs(res(2,0)-ref(2,0)) >1e-10||std::abs(res(2,1)-ref(2,1)) >1e-10||std::abs(res(2,2)-ref(2,2)) >1e-10
     )   {err("operator * [matrix] (l-value, l-value) test [ res]");}
 }
 
@@ -481,9 +484,9 @@ int main()
     if(res.size() != 9) {err("operator *[matrix] (r-value, l-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-10||res(0,1)-ref(0,1) >1e-10||res(0,2)-ref(0,2) >1e-10
-        ||res(1,0)-ref(1,0) >1e-10||res(1,1)-ref(1,1) >1e-10||res(1,2)-ref(1,2) >1e-10
-        ||res(2,0)-ref(2,0) >1e-10||res(2,1)-ref(2,1) >1e-10||res(2,2)-ref(2,2) >1e-10
+        std::abs(res(0,0)-ref(0,0)) >1e-10||std::abs(res(0,1)-ref(0,1)) >1e-10||std::abs(res(0,2)-ref(0,2)) >1e-10
+        ||std::abs(res(1,0)-ref(1,0)) >1e-10||std::abs(res(1,1)-ref(1,1)) >1e-10||std::abs(res(1,2)-ref(1,2)) >1e-10
+        ||std::abs(res(2,0)-ref(2,0)) >1e-10||std::abs(res(2,1)-ref(2,1)) >1e-10||std::abs(res(2,2)-ref(2,2)) >1e-10
     )   {err("operator * [matrix] (r-value, l-value) test [ res]");}
 }
 
@@ -503,9 +506,9 @@ int main()
     if(res.size() != 9) {err("operator *[matrix] (l-value, r-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-10||res(0,1)-ref(0,1) >1e-10||res(0,2)-ref(0,2) >1e-10
-        ||res(1,0)-ref(1,0) >1e-10||res(1,1)-ref(1,1) >1e-10||res(1,2)-ref(1,2) >1e-10
-        ||res(2,0)-ref(2,0) >1e-10||res(2,1)-ref(2,1) >1e-10||res(2,2)-ref(2,2) >1e-10
+        std::abs(res(0,0)-ref(0,0)) >1e-10||std::abs(res(0,1)-ref(0,1)) >1e-10||std::abs(res(0,2)-ref(0,2)) >1e-10
+        ||std::abs(res(1,0)-ref(1,0)) >1e-10||std::abs(res(1,1)-ref(1,1)) >1e-10||std::abs(res(1,2)-ref(1,2)) >1e-10
+        ||std::abs(res(2,0)-ref(2,0)) >1e-10||std::abs(res(2,1)-ref(2,1)) >1e-10||std::abs(res(2,2)-ref(2,2)) >1e-10
     )   {err("operator * [matrix] (l-value, r-value) test [ res]");}
 }
 
@@ -519,9 +522,9 @@ int main()
     if(res.size() != 9) {err("operator *[matrix] (r-value, r-value) test [ size]");}
     if
     (
-        res(0,0)-ref(0,0) >1e-10||res(0,1)-ref(0,1) >1e-10||res(0,2)-ref(0,2) >1e-10
-        ||res(1,0)-ref(1,0) >1e-10||res(1,1)-ref(1,1) >1e-10||res(1,2)-ref(1,2) >1e-10
-        ||res(2,0)-ref(2,0) >1e-10||res(2,1)-ref(2,1) >1e-10||res(2,2)-ref(2,2) >1e-10
+        std::abs(res(0,0)-ref(0,0)) >1e-10||std::abs(res(0,1)-ref(0,1)) >1e-10||std::abs(res(0,2)-ref(0,2)) >1e-10
+        ||std::abs(res(1,0)-ref(1,0)) >1e-10||std::abs(res(1,1)-ref(1,1)) >1e-10||std::abs(res(1,2)-ref(1,2)) >1e-10
+        ||std::abs(res(2,0)-ref(2,0)) >1e-10||std::abs(res(2,1)-ref(2,1)) >1e-10||std::abs(res(2,2)-ref(2,2)) >1e-10
     )   {err("operator * [matrix] (r-value, r-value) test [ res]");}
 }
 
@@ -534,6 +537,9 @@ int main()
 
 
 {
+     std::ofstream ofile("time.txt");
+    for(int i=0; i<100; i++)
+    {
     std::vector<double> u(9);
     std::vector<double> v(9);
     std::random_device rd{};
@@ -549,7 +555,10 @@ int main()
     m=m*n;
     auto t2 = std::chrono::high_resolution_clock::now();
     double x =(static_cast<std::chrono::duration<double, std::milli>>(t2-t1)).count();
-    std::cout<<x<<std::endl;
+
+    ofile<< x << std::endl;
+    }
 }
+
 
 }
