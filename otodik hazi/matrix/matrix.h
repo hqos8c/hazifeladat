@@ -308,18 +308,18 @@ template<typename F>
 	template<typename T>
 	Matrix<T> operator*(Matrix<T> const& m,Matrix<T> const& n)
 	{
-		if(m.cols()==m.rows()){		
+		if(m.cols()==n.rows()){		
 		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
-			for(int j=0;j<m.cols();j++)
+			for(int j=0;j<n.rows();j++)
 			{
 				x += m(i,j)*n(j,k);
 			}	
 			return x;
 		};
 
-	 		return Matrix<T>(Idx2{},mylambda,m.cols(),m.rows());
+	 		return Matrix<T>(Idx2{},mylambda,n.cols(),m.rows());
 		}
 		else
 		{
@@ -331,9 +331,9 @@ template<typename F>
 	}
 
 	template<typename T>
-	Matrix<T> operator*(Matrix<T>&& m,Matrix<T> const& n)
+	Matrix<T>&& operator*(Matrix<T>&& m,Matrix<T> const& n)
 	{
-		if(m.cols()==m.rows()){
+		if(m.cols()==n.rows()){
 		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
@@ -345,7 +345,7 @@ template<typename F>
 		};
 
 
-			Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());
+			Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());
 			m=std::move(result);
 			return std::move(m);
 	}	
@@ -357,9 +357,9 @@ template<typename F>
 	}
 
 	template<typename T>
-	Matrix<T> operator*(Matrix<T> const& m,Matrix<T>&& n)
+	Matrix<T>&& operator*(Matrix<T> const& m,Matrix<T>&& n)
 	{
-		if(m.cols()==m.rows()){
+		if(m.cols()==n.rows()){
 		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
@@ -370,7 +370,7 @@ template<typename F>
 			return x;
 		};
 
-	Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());	
+	Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());	
 	n=std::move(result);
 	return std::move(n);
 		}	
@@ -384,9 +384,9 @@ template<typename F>
 	}
 
 	template<typename T>
-	Matrix<T> operator*(Matrix<T>&& m,Matrix<T>&& n)
+	Matrix<T>&& operator*(Matrix<T>&& m,Matrix<T>&& n)
 	{
-		if(m.cols()==m.rows())
+		if(m.cols()==n.rows())
 		{
 		auto mylambda = [&](int i, int k)
 		{ 
@@ -398,7 +398,7 @@ template<typename F>
 			return x;
 		};
 
-			Matrix<T> result(Idx2{},mylambda,m.cols(),m.rows());
+			Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());
 			n=std::move(result);
 			return std::move(n);
 		}	

@@ -16,6 +16,8 @@ int main()
     int n = 3;
     std::vector<double> v = {5.0,3.0,1.0,-1.0,-9.0,-11.0,-13.0,15.0,19.0};
     std::vector<double> u = {0.3,0.3,0.9,-0.11,-0.9,0.1,0.3,0.15,0.17}; 
+    std::vector<double> v_1 = {3.0,5.0,7.0,9.0,11.0,12.0};
+    std::vector<double> u_1 = {-1.0,5.0,0.0,0.7,9.0,1.0,-1.0,3.1,4.0,0.0,2.0,1.0}; 
 {
     Matrix<double>  M;
     if(M.size() != 0) {err("initializer list constructor test [size]");}
@@ -530,6 +532,96 @@ int main()
     )   {err("operator * [matrix] (r-value, r-value) test [ res]");}
 }
 
+
+{ 
+    std::vector<double> ref_1 {70.0,20.0,9.0,24.6,138.0,56.0,13.0,52.4};
+    Matrix<double> M(3,2,v_1);
+    Matrix<double> N(4,3,u_1);
+    Matrix<double> ref(4,2,ref_1);
+    Matrix<double> res = M*N;
+
+    if(M.size() != 6) {err("operator *[matrix] (l-value, l-value) test [ size]");}
+    if(N.size() != 12) {err("operator *[matrix] (l-value, l-value) test [ size]");}
+    if(
+        N(0,0) != -1.0 ||N(0,1)!=5.0||(N(0,2)!=0.0)||N(0,3)!=0.7
+        ||(N(1,0)!=9.0) ||N(1,1)!=1.0||N(1,2)!=-1.0||N(1,3)!=3.1
+        ||N(2,0)!=4.0 ||N(2,1)!=0.0||N(2,2)!=2.0|| N(2,3)!=1.0)
+        { err("operator *[matrix] test [elements]");}
+    if(
+        M(0,0) != 3.0 ||M(0,1)!=5.0||(M(0,2)!=7.0)
+        ||(M(1,0)!=9.0) ||M(1,1)!=11.0||M(1,2)!=12.0)
+        { err("operator *[matrix] test [elements]");}
+   if(res.size() != 8) {err("operator *[matrix] (l-value, l-value) test [ size]");}
+    if
+    (
+        std::abs(res(0,0)-ref(0,0)) >1e-10||std::abs(res(0,1)-ref(0,1)) >1e-10||std::abs(res(0,2)-ref(0,2)) >1e-10||std::abs(res(0,3)-ref(0,3)) >1e-10
+        ||std::abs(res(1,0)-ref(1,0)) >1e-10||std::abs(res(1,1)-ref(1,1)) >1e-10||std::abs(res(1,2)-ref(1,2)) >1e-10||std::abs(res(1,3)-ref(1,3)) >1e-10
+    )   {err("operator * [matrix] (l-value, l-value) test [ res]");}
+}
+
+{
+
+    std::vector<double> ref_1 {70.0,20.0,9.0,24.6,138.0,56.0,13.0,52.4};
+    Matrix<double> M(3,2,v_1);
+    Matrix<double> N(4,3,u_1);
+    Matrix<double> ref(4,2,ref_1);
+    Matrix<double> res = std::move(M)*N;
+
+    if(M.size() != 0) {err("operator *[matrix] (r-value, l-value) test [ size]");}
+    if(N.size() != 12) {err("operator *[matrix] (r-value, l-value) test [ size]");}
+    if(
+        N(0,0) != -1.0 ||N(0,1)!=5.0||(N(0,2)!=0.0)||N(0,3)!=0.7
+        ||(N(1,0)!=9.0) ||N(1,1)!=1.0||N(1,2)!=-1.0||N(1,3)!=3.1
+        ||N(2,0)!=4.0 ||N(2,1)!=0.0||N(2,2)!=2.0|| N(2,3)!=1.0)
+        { err("operator *[matrix] test [elements]");}
+    if(res.size() != 8) {err("operator *[matrix] (r-value, l-value) test [ size]");}
+    if
+    (
+        std::abs(res(0,0)-ref(0,0)) >1e-10||std::abs(res(0,1)-ref(0,1)) >1e-10||std::abs(res(0,2)-ref(0,2)) >1e-10||std::abs(res(0,3)-ref(0,3)) >1e-10
+        ||std::abs(res(1,0)-ref(1,0)) >1e-10||std::abs(res(1,1)-ref(1,1)) >1e-10||std::abs(res(1,2)-ref(1,2)) >1e-10||std::abs(res(1,3)-ref(1,3)) >1e-10
+    )   {err("operator * [matrix] (r-value, l-value) test [ res]");}
+}
+
+{
+    std::vector<double> ref_1 {70.0,20.0,9.0,24.6,138.0,56.0,13.0,52.4};
+    Matrix<double> M(3,2,v_1);
+    Matrix<double> N(4,3,u_1);
+    Matrix<double> ref(4,2,ref_1);
+    Matrix<double> res = M*std::move(N);
+
+    if(M.size() != 6) {err("operator *[matrix] (l-value, r-value) test [ size]");}
+    if(N.size() != 0) {err("operator *[matrix] (l-value, r-value) test [ size]");}
+    if(
+        M(0,0) != 3.0 ||M(0,1)!=5.0||(M(0,2)!=7.0)
+        ||(M(1,0)!=9.0) ||M(1,1)!=11.0||M(1,2)!=12.0)
+        { err("operator *[matrix] test [elements]");}
+   if(res.size() != 8) {err("operator *[matrix] (l-value, r-value) test [ size]");}
+    if
+    (
+        std::abs(res(0,0)-ref(0,0)) >1e-10||std::abs(res(0,1)-ref(0,1)) >1e-10||std::abs(res(0,2)-ref(0,2)) >1e-10||std::abs(res(0,3)-ref(0,3)) >1e-10
+        ||std::abs(res(1,0)-ref(1,0)) >1e-10||std::abs(res(1,1)-ref(1,1)) >1e-10||std::abs(res(1,2)-ref(1,2)) >1e-10||std::abs(res(1,3)-ref(1,3)) >1e-10
+    )   {err("operator * [matrix] (l-value, r-value) test [ res]");}
+}
+
+{
+
+    
+    std::vector<double> ref_1 {70.0,20.0,9.0,24.6,138.0,56.0,13.0,52.4};
+    Matrix<double> M(3,2,v_1);
+    Matrix<double> N(4,3,u_1);
+    Matrix<double> ref(4,2,ref_1);
+    Matrix<double> res = std::move(M)*std::move(N);
+
+    if(M.size() != 6) {err("operator *[matrix] (r-value, r-value) test [ size]");}
+    if(N.size() != 0) {err("operator *[matrix] (r-value, r-value) test [ size]");}
+   if(res.size() != 8) {err("operator *[matrix] (r-value, r-value) test [ size]");}
+    if
+    (
+        std::abs(res(0,0)-ref(0,0)) >1e-10||std::abs(res(0,1)-ref(0,1)) >1e-10||std::abs(res(0,2)-ref(0,2)) >1e-10||std::abs(res(0,3)-ref(0,3)) >1e-10
+        ||std::abs(res(1,0)-ref(1,0)) >1e-10||std::abs(res(1,1)-ref(1,1)) >1e-10||std::abs(res(1,2)-ref(1,2)) >1e-10||std::abs(res(1,3)-ref(1,3)) >1e-10
+    )   {err("operator * [matrix] (r-value, r-value) test [ res]");}
+}
+
 {
     Matrix<double>  M(n,n,v);
     std::cout<< M << std::endl;
@@ -538,7 +630,9 @@ int main()
 {
     std::ofstream ofile("time.txt");
     
-    for(int j = 2; j<12;j++)
+    std::vector<double> data(100);
+    
+    for(int j = 2; j<100;j++)
     {
         for(int i=0; i<100; i++)
         {
@@ -546,7 +640,7 @@ int main()
             std::vector<double> v(j*j);
             std::random_device rd{};
             std::mt19937 gen(rd());
-            std::normal_distribution<double> distr(100,20);
+            std::normal_distribution<double> distr(0,2);
             std::generate(u.begin(),u.end(),[&]{ return distr(gen); });
             std::generate(v.begin(),v.end(),[&]{ return distr(gen); });
 
@@ -558,24 +652,11 @@ int main()
             auto t2 = std::chrono::high_resolution_clock::now();
             double x =(static_cast<std::chrono::duration<double, std::milli>>(t2-t1)).count();
 
-            ofile<< x << std::endl;
+            data[i] = x;
+        } 
+        double a  = *std::min_element(std::begin(data),std::end(data));
+        ofile << j << " " << a<< std::endl;
         }
-    }
-
-
 }
-
-/*    std::vector<double> data;
-    std::ifstream input("time.txt");
-    if( input.is_open() )
-{
-std::copy( std::istream_iterator<double>(input),std::istream_iterator<double>(),std::back_inserter(data) );
-}
-else{ std::cout << "Could not open input file\n"; }
-
-    for(int i=1;i<11;i++)
-    {
-        std::cout<<std::min_element(data[i*100],data[100])<<std::endl;
-    }*/
 
 }
