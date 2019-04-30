@@ -14,16 +14,12 @@ int main() {
     std::ifstream input("data_2.txt");
     if(input.is_open())
     {
-        std::cout<<"so far so good"<<std::endl;
-        
-        int sum =0;
-        std::string tmp_1;
-        std::string tmp_2;
-        for(std::string line;std::getline(input,tmp_1,';'); )
+        std::string tmp;
+        for(std::string line;std::getline(input,tmp,','); )
         {
-            sum += 1;
+            double b = std::stod(tmp);
+            std::cout<< b<< std::endl;
         } 
-        std::cout<<sum<<std::endl;
     }
     else{err("opening"); }
 }
