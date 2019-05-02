@@ -18,11 +18,15 @@ int main() {
         std::string m = "2018 5 ";
         std::string d = "2018 5 30 ";
 
-        float a,b,c = 0.0;
-        int fer_div,vel_div,bal_div = 0;
+        float a = 0.0;
+        float b = 0.0;
+        float c = 0.0;
+        int fer_div = 0;
+        int vel_div = 0;
+        int bal_div = 0;
 
 
-     std::ofstream ofile("realdata.txt");
+        std::ofstream ofile("realdata.txt");
 
         for(std::string line;std::getline(input,tmp,';');)
         {
@@ -36,16 +40,17 @@ int main() {
             {
                 if(d_f == std::string::npos)
                 {
-
-                std::cout<<fer_div<<" "<<vel_div<<" "<< bal_div<<std::endl;
-
-                 a /= fer_div;
-                 b /= vel_div;
-                 c /= bal_div;
-                ofile<<d<<" Fertő-tó: "<<a<<"\n"<<d<<" Velencei-tó átlag: "<<b<<"\n"<<d<<"Balaon átlag: "<<c<<"\n";
-                a,b,c =0.0;
-                fer_div,vel_div,bal_div=0;
-                d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+9);
+                     a /= fer_div;
+                     b /= vel_div;
+                     c /= bal_div;
+                    ofile<<d<<" Fertő-tó: "<<a<<"\n"<<d<<" Velencei-tó átlag: "<<b<<"\n"<<d<<"Balaon átlag: "<<c<<"\n";
+                    a =0.0;
+                    b =0.0;
+                    c =0.0;
+                    fer_div=0;
+                    vel_div=0;
+                    bal_div=0;
+                    d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+9);
                 }
             }
             else{d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+7);}
@@ -61,15 +66,29 @@ int main() {
         
             if(Ferto != std::string::npos)
             {
-                tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());
+                if(Dat_zero != std::string::npos && Dat_zero_1 == std::string::npos)
+                {
+                tmp.replace(tmp.begin(),tmp.end(),tmp.end()-1,tmp.end());                    
+                }
+                else
+                {
+                    tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());
+                    fer_div++;
+                }
                 a += std::stof(tmp);
-                fer_div++;
             }
             if(Velence != std::string::npos)
             {
-                tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());
+                if(Dat_zero != std::string::npos && Dat_zero_1 == std::string::npos)
+                {
+                tmp.replace(tmp.begin(),tmp.end(),tmp.end()-1,tmp.end());                    
+                }
+                else
+                {
+                    tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());    
+                    vel_div++;
+                }
                 b += std::stof(tmp);
-                vel_div++;
             }
             if(Balaton_1 != std::string::npos ||Balaton_2 != std::string::npos || Balaton_3 != std::string::npos)
             {
