@@ -19,7 +19,8 @@ int main() {
         std::string d = "2018 5 30 ";
 
         float a,b,c = 0.0;
-        int i = 0;
+        int fer_div,vel_div,bal_div = 0;
+
 
      std::ofstream ofile("realdata.txt");
 
@@ -35,12 +36,15 @@ int main() {
             {
                 if(d_f == std::string::npos)
                 {
-                 a /= i;
-                 b /= i;
-                 c /= i*4;
+
+                std::cout<<fer_div<<" "<<vel_div<<" "<< bal_div<<std::endl;
+
+                 a /= fer_div;
+                 b /= vel_div;
+                 c /= bal_div;
                 ofile<<d<<" Fertő-tó: "<<a<<"\n"<<d<<" Velencei-tó átlag: "<<b<<"\n"<<d<<"Balaon átlag: "<<c<<"\n";
-                a,b,c =0;
-                i=0;
+                a,b,c =0.0;
+                fer_div,vel_div,bal_div=0;
                 d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+9);
                 }
             }
@@ -58,16 +62,14 @@ int main() {
             if(Ferto != std::string::npos)
             {
                 tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());
-                a = std::stof(tmp);
-                std::cout<<a<<std::endl;
-                i++;
-
+                a += std::stof(tmp);
+                fer_div++;
             }
             if(Velence != std::string::npos)
             {
                 tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());
-                b = std::stof(tmp);
-                std::cout<<b<<std::endl;
+                b += std::stof(tmp);
+                vel_div++;
             }
             if(Balaton_1 != std::string::npos ||Balaton_2 != std::string::npos || Balaton_3 != std::string::npos)
             {
@@ -78,6 +80,7 @@ int main() {
                 else
                 {
                 tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());
+                bal_div++;
                 }
                 c += std::stof(tmp);
             }            
