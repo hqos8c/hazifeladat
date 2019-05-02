@@ -14,17 +14,39 @@ int main() {
     if(input.is_open())
     {
         std::string tmp;
+        std::string y = "2018";
+        std::string m = "2018 5 ";
+        std::string d = "2018 5 30 ";
 
-        float a = 0.0;
-        float b = 0.0;
-        float c = 0.0;
-    
+        float a,b,c = 0.0;
+        int i = 0;
 
      std::ofstream ofile("realdata.txt");
 
         for(std::string line;std::getline(input,tmp,';');)
         {
-        
+        std::size_t y_f = tmp.find(y);
+        std::size_t m_f = tmp.find(m);
+        std::size_t d_f = tmp.find(d);
+
+        if(y_f != std::string::npos)
+        {
+            if(m_f != std::string::npos)
+            {
+                if(d_f == std::string::npos)
+                {
+                 a /= i;
+                 b /= i;
+                 c /= i*4;
+                ofile<<d<<" Fertő-tó: "<<a<<"\n"<<d<<" Velencei-tó átlag: "<<b<<"\n"<<d<<"Balaon átlag: "<<c<<"\n";
+                a,b,c =0;
+                i=0;
+                d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+9);
+                }
+            }
+            else{d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+7);}
+        }
+
         std::size_t Velence = tmp.find("Agard");
         std::size_t Ferto = tmp.find("Fertorakos");
         std::size_t Balaton_1 = tmp.find("Siofok");
@@ -32,13 +54,13 @@ int main() {
         std::size_t Balaton_3 = tmp.find("Tihany");
         std::size_t Dat_zero = tmp.find(",0");
         std::size_t Dat_zero_1 = tmp.find(",0.");
-        //std::size_t ymd = tmp.find(ref);
-
+        
             if(Ferto != std::string::npos)
             {
                 tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());
                 a = std::stof(tmp);
                 std::cout<<a<<std::endl;
+                i++;
 
             }
             if(Velence != std::string::npos)
