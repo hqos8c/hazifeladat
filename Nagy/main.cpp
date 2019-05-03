@@ -13,7 +13,7 @@ int main() {
     std::ifstream input("data_2.txt");
     if(input.is_open())
     {
-        std::string tmp;
+        std::string tmp;      
         std::string y = "2018";
         std::string m = "2018 5 ";
         std::string d = "2018 5 30 ";
@@ -21,10 +21,12 @@ int main() {
         float a = 0.0;
         float b = 0.0;
         float c = 0.0;
+
+        int d_end = 10; 
+        int m_end = 6;
         int fer_div = 0;
         int vel_div = 0;
         int bal_div = 0;
-
 
         std::ofstream ofile("realdata.txt");
 
@@ -33,6 +35,9 @@ int main() {
         std::size_t y_f = tmp.find(y);
         std::size_t m_f = tmp.find(m);
         std::size_t d_f = tmp.find(d);
+        std::size_t tiz = tmp.find("10");
+
+        if(tiz == 7){d_end=10;} if(tiz == 5){d_end=10;m_end=7;} if(tiz == 8){d_end=11;m_end=7;}
 
         if(y_f != std::string::npos)
         {
@@ -40,20 +45,35 @@ int main() {
             {
                 if(d_f == std::string::npos)
                 {
-                     a /= fer_div;
-                     b /= vel_div;
-                     c /= bal_div;
-                    ofile<<d<<" Fertő-tó: "<<a<<"\n"<<d<<" Velencei-tó átlag: "<<b<<"\n"<<d<<"Balaon átlag: "<<c<<"\n";
+                    a /= fer_div;
+                    b /= vel_div;
+                    c /= bal_div;
+                    ofile<<d<<" Fertő-tó: "<<a<<"\n"<<d<<" Velencei-tó átlag: "<<b<<"\n"<<d<<" Balaon átlag: "<<c<<"\n";
                     a =0.0;
                     b =0.0;
                     c =0.0;
                     fer_div=0;
                     vel_div=0;
                     bal_div=0;
-                    d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+9);
+                    d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+d_end);
                 }
             }
-            else{d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+7);}
+            if(m_f == std::string::npos)
+            {
+                a /= fer_div;
+                b /= vel_div;
+                c /= bal_div;
+                ofile<<d<<" Fertő-tó: "<<a<<"\n"<<d<<" Velencei-tó átlag: "<<b<<"\n"<<d<<" Balaton átlag: "<<c<<"\n";
+                a =0.0;
+                b =0.0;
+                c =0.0;
+                fer_div=0;
+                vel_div=0;
+                bal_div=0;
+                d_end = 8;
+                m.replace(m.begin(),m.end(),tmp.begin(),tmp.begin()+m_end);
+                d.replace(d.begin(),d.end(),tmp.begin(),tmp.begin()+d_end);
+            }
         }
 
         std::size_t Velence = tmp.find("Agard");
@@ -63,7 +83,8 @@ int main() {
         std::size_t Balaton_3 = tmp.find("Tihany");
         std::size_t Dat_zero = tmp.find(",0");
         std::size_t Dat_zero_1 = tmp.find(",0.");
-        
+        std::size_t dot = tmp.find(".");
+        std::size_t dotvonal = tmp.find(".,");
             if(Ferto != std::string::npos)
             {
                 if(Dat_zero != std::string::npos && Dat_zero_1 == std::string::npos)
@@ -72,7 +93,8 @@ int main() {
                 }
                 else
                 {
-                    tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());
+                    if(dot != std::string::npos){tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());}    
+                    else{tmp.replace(tmp.begin(),tmp.end(),tmp.end()-2,tmp.end());}
                     fer_div++;
                 }
                 a += std::stof(tmp);
@@ -85,7 +107,8 @@ int main() {
                 }
                 else
                 {
-                    tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());    
+                    if(dot != std::string::npos){tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());}    
+                    else{tmp.replace(tmp.begin(),tmp.end(),tmp.end()-2,tmp.end());}
                     vel_div++;
                 }
                 b += std::stof(tmp);
@@ -96,10 +119,11 @@ int main() {
                 {
                 tmp.replace(tmp.begin(),tmp.end(),tmp.end()-1,tmp.end());                    
                 }
-                else
+                if(Dat_zero == std::string::npos)
                 {
-                tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());
-                bal_div++;
+                    if(dot != std::string::npos && dotvonal == std::string::npos){tmp.replace(tmp.begin(),tmp.end(),tmp.end()-4,tmp.end());}    
+                    else{tmp.replace(tmp.begin(),tmp.end(),tmp.end()-2,tmp.end());}
+                    bal_div++;
                 }
                 c += std::stof(tmp);
             }            
