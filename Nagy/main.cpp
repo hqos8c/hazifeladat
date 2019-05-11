@@ -40,6 +40,18 @@ public:
     }
 };
 
+std::vector<Time_data> remove(std::vector<Time_data>& data, std::string name) {
+    for (Time_data& d: data) {
+        for (int i = d.measurments.size() - 1; i >= 0; i--) {
+            auto v = d.measurments[i];
+            if (v.name == name) {
+                d.measurments.erase(d.measurments.begin() + i);
+            }
+        }
+    }
+    return data;
+} 
+
 std::pair<std::string, std::string> splitFirst(std::string& input, char separator)
 {
     auto pos = input.find(separator);
@@ -111,6 +123,8 @@ std::vector<Time_data> parse_file() {
             data_vector.push_back(time_data);
         }
     }
+    data_vector = remove(data_vector, "Balaton atlag");
+    data_vector = remove(data_vector,"Tihany Rev tavj.");
     return data_vector;
 }
 
@@ -127,7 +141,6 @@ Time_data calculateDayAverage(Date& date, std::vector<double> sum, std::vector<i
             
             td.measurments.push_back(v);
         }
-
     return td;
 }
 
@@ -176,34 +189,31 @@ void writeOut(std::vector<Time_data>& data) {
     }
 }
 
-std::vector<Time_data> remove(std::vector<Time_data>& data, std::string name) {
-    for (Time_data& d: data) {
-        for (int i = d.measurments.size() - 1; i >= 0; i--) {
-            auto v = d.measurments[i];
-            if (v.name == name) {
-                d.measurments.erase(d.measurments.begin() + i);
+
+void interpolate_second(std::vector<Time_data> data,std::vector<int> n, int j){
+
+
+}
+
+void interpolate_firstep(std::vector<Time_data> data){
+    std::vector<int> n;
+ // finding zeros with indexes
+    for(int i =0; i<data[0].measurments.size();i++){
+        for(int j=0;j<data.size()-1;j++){
+            if(data[j].measurments[i].value < 0.000001){
+            n.push_back(j);
             }
         }
+        n.resize(0);
     }
-    return data;
-} 
-
-/*void interpolate_firstep(std::vector<Time_data> data){
-    std::vector<int> n = 
-    for(int i=0;i<data.size();i++){
-        for(int  j;j< data[i].measurments.size();j++){
-            if(data[i].measurments[j].value < 0.00001){}
-        }
-    }
-}*/
+}
 
 int main()
 {
     auto data = parse_file();
-    data = remove(data, "Balaton atlag");
-    data = remove(data,"Tihany Rev tavj");
-    data = average(data);
-   // interpolate_firstep(data);
+    interpolate_firstep(data);
+    //data = average(data);
 
+    //
     writeOut(data); 
 }
