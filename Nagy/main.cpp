@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -175,6 +174,17 @@ std::vector<Time_data> average(std::vector<Time_data>& data)
     result.push_back(calculateDayAverage(date, sum, count, data[0]));
     return result;
 }
+
+double hoingas(std::vector<double> const& v, int i){
+    double result = 0.0;
+    if(v.size()-i < 7){result =0.0;}
+    if(i != 0){
+        int k =i-7;
+        auto b = std::minmax_element(v.begin()+k,v.begin()+i);
+        result = *b.second-*b.first;
+    }
+    return result;
+}
     
 void writeOut(std::vector<Time_data> const& data) {
         std::ofstream ofile("realdata.txt");
@@ -193,9 +203,14 @@ void writeOut(std::vector<Time_data> const& data) {
         for(auto e : data){
             v.push_back(e.measurments[i].value);
         }
+        ofile <<data[0].measurments[i].name<<':'<<std::endl;
         auto b = std::minmax_element(v.begin(),v.end());
-        ofile <<data[0].measurments[i].name<<" leghidegebb hőmérséklete: "<< *b.first<<std::endl;
-        ofile <<data[0].measurments[i].name<<" legmelegebb hőmérséklete: "<< *b.second<<std::endl;
+        ofile<<" A legkissebb hőmérséklete: "<< *b.first<<std::endl;
+        ofile <<" A legnagyobb hőmérséklete: "<< *b.second<<std::endl;
+    for(int r=0;r<v.size();r+=7){
+        double h_ingas = hoingas(v,r);
+        if(std::abs(h_ingas) >0.0000001){ofile<<(r)/7<<". heti hőingás "<<h_ingas<<std::endl;}
+        }
     }
 }
 
