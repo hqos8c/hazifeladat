@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -174,19 +175,6 @@ std::vector<Time_data> average(std::vector<Time_data>& data)
     result.push_back(calculateDayAverage(date, sum, count, data[0]));
     return result;
 }
-
-void hoingas(std::vector<Time_data> const& data){
-        std::max_element(data[0].measurments[0].value,data[data.size()-1].measurments[0].value);
-        std::max_element(data[0].measurments[1].value,data[data.size()-1].measurments[1].value);
-        std::max_element(data[0].measurments[2].value,data[data.size()-1].measurments[2].value);
-        std::max_element(data[0].measurments[3].value,data[data.size()-1].measurments[3].value);
-        
-        std::min_element(data[0].measurments[0].value,data[data.size()-1].measurments[0].value);
-        std::min_element(data[0].measurments[1].value,data[data.size()-1].measurments[1].value);
-        std::min_element(data[0].measurments[2].value,data[data.size()-1].measurments[2].value);
-        std::min_element(data[0].measurments[3].value,data[data.size()-1].measurments[3].value);
-}
-
     
 void writeOut(std::vector<Time_data> const& data) {
         std::ofstream ofile("realdata.txt");
@@ -200,8 +188,15 @@ void writeOut(std::vector<Time_data> const& data) {
     ofile<<"Balaton átlag: "<< (d.measurments[2].value+d.measurments[3].value)/2<<";";
     ofile << std::endl;
     }
-    
-
+    for(int i=0;i<4;i++){
+        std::vector<double> v;
+        for(auto e : data){
+            v.push_back(e.measurments[i].value);
+        }
+        auto b = std::minmax_element(v.begin(),v.end());
+        ofile <<data[0].measurments[i].name<<" leghidegebb hőmérséklete: "<< *b.first<<std::endl;
+        ofile <<data[0].measurments[i].name<<" legmelegebb hőmérséklete: "<< *b.second<<std::endl;
+    }
 }
 
 void interpolate_calculate_2(std::vector<Time_data> & data, int first,int last,int i){
