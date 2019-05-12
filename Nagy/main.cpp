@@ -6,6 +6,8 @@
 #include <cmath>
 #include <vector>
 #include <utility>
+#include <algorithm>
+#include <numeric>
 
 class Date
 {
@@ -32,7 +34,7 @@ public:
     Date date;
     std::vector<Measurment> measurments;
 
-    Time_data(Date& date): date(date), measurments({}) {}
+    Time_data(Date & date): date(date), measurments({}) {}
     
     Time_data& addMeasurment(Measurment m) {
         this -> measurments.push_back(m);
@@ -40,7 +42,7 @@ public:
     }
 };
 
-std::vector<Time_data> remove(std::vector<Time_data>& data, std::string name) {
+std::vector<Time_data> remove(std::vector<Time_data> & data, std::string name) {
     for (Time_data& d: data) {
         for (int i = d.measurments.size() - 1; i >= 0; i--) {
             auto v = d.measurments[i];
@@ -128,7 +130,7 @@ std::vector<Time_data> parse_file() {
     return data_vector;
 }
 
-Time_data calculateDayAverage(Date& date, std::vector<double> sum, std::vector<int> count, Time_data& d) {
+Time_data calculateDayAverage(Date& date, std::vector<double> const& sum, std::vector<int> const& count, Time_data& d) {
     Time_data td = Time_data(date);
         
         for (int i = 0; i < sum.size(); i++) {
@@ -172,48 +174,82 @@ std::vector<Time_data> average(std::vector<Time_data>& data)
     result.push_back(calculateDayAverage(date, sum, count, data[0]));
     return result;
 }
+
+void hoingas(std::vector<Time_data> const& data){
+        std::max_element(data[0].measurments[0].value,data[data.size()-1].measurments[0].value);
+        std::max_element(data[0].measurments[1].value,data[data.size()-1].measurments[1].value);
+        std::max_element(data[0].measurments[2].value,data[data.size()-1].measurments[2].value);
+        std::max_element(data[0].measurments[3].value,data[data.size()-1].measurments[3].value);
+        
+        std::min_element(data[0].measurments[0].value,data[data.size()-1].measurments[0].value);
+        std::min_element(data[0].measurments[1].value,data[data.size()-1].measurments[1].value);
+        std::min_element(data[0].measurments[2].value,data[data.size()-1].measurments[2].value);
+        std::min_element(data[0].measurments[3].value,data[data.size()-1].measurments[3].value);
+}
+
     
-void writeOut(std::vector<Time_data>& data) {
+void writeOut(std::vector<Time_data> const& data) {
         std::ofstream ofile("realdata.txt");
     for (auto d: data) {
         ofile << d.date.year << " ";
         ofile << d.date.month << " ";
         ofile << d.date.day << " ";
 
-        for (auto v: d.measurments) {
-            ofile << v.name << ",";
-            ofile << v.value << ";";
-        }
+    ofile<<"Ferto átlag: "<< d.measurments[0].value<<";";
+    ofile<<"Velence átlag: "<< d.measurments[1].value<<";";
+    ofile<<"Balaton átlag: "<< (d.measurments[2].value+d.measurments[3].value)/2<<";";
+    ofile << std::endl;
+    }
+    
 
-        ofile << std::endl;
+}
+
+void interpolate_calculate_2(std::vector<Time_data> & data, int first,int last,int i){
+    double m = (data[first].measurments[i].value-data[last].measurments[i].value)/(first-last);
+    double b = (data[last].measurments[i].value-(m*last));
+    for(int j=first+1;j<last;j++){
+            data[j].measurments[i].value=m*j+b;
     }
 }
 
-
-void interpolate_second(std::vector<Time_data> data,std::vector<int> n, int j){
-
-
+void interpolate_calculate(std::vector<Time_data> & data,std::vector<int> n, int i){
+    int first=n[0]-1;
+    for(int e=1;e<n.size();e++){
+        if((n[e]-n[e-1]) != 1)
+        {
+            interpolate_calculate_2(data,first,n[e-1]+1,i);
+            first=n[e]-1;
+        }
+    }
 }
 
-void interpolate_firstep(std::vector<Time_data> data){
+void interpolate(std::vector<Time_data> & data){
     std::vector<int> n;
- // finding zeros with indexes
     for(int i =0; i<data[0].measurments.size();i++){
         for(int j=0;j<data.size()-1;j++){
             if(data[j].measurments[i].value < 0.000001){
             n.push_back(j);
             }
         }
+        interpolate_calculate(data,n,i);
         n.resize(0);
     }
+}
+
+std::vector<Time_data> datamaker (std::vector<Time_data> & data){
+    for(int i = 0;i<data.size();i++){
+        if(data[i].measurments.size() != data[0].measurments.size()){
+            data[i].measurments = data[i-1].measurments;
+        }
+    }
+    return data;
 }
 
 int main()
 {
     auto data = parse_file();
-    interpolate_firstep(data);
-    //data = average(data);
-
-    //
+    data =datamaker(data);
+    interpolate(data);
+    data = average(data);
     writeOut(data); 
 }
