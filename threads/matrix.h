@@ -27,6 +27,13 @@ template<typename M1, typename M2, typename M3, typename F>
  auto add = [](auto const& x, auto const& y){ return x + y; };
  auto sub = [](auto const& x, auto const& y){ return x - y; };
 
+
+int max_num_of_threads = (int)std::thread::hardware_concurrency;
+auto p = std::thread::hardware_concurrency();
+std::vector<std::future<double>> futures(p);
+
+
+
 struct Idx1{};
 struct Idx2{};
 
@@ -323,9 +330,14 @@ template<typename F>
 
 	auto mylambda =[&](int i, int k)
 	{
-	auto t1 = std::async(f1, i, k, 0,n.rows()/2);
-	auto t2 = std::async(f1, i, k, n.rows()/2,n.rows());
-		return t1.get()+t2.get();
+		for(int r=0;r<max_num_of_threads;++r){
+				auto it0 = r*n.rows()/p;
+				auto it1 = (r+1)*n.rows()/p;
+			futures[r] = std::async(f1, i, k, it0,it1);
+		}
+		auto parallel_result = std::accumulate(futures.begin(), futures.end(), 0.0, [](double acc, std::future<double>& f){ return acc + f.get();});
+	
+				return parallel_result;
 	};
 
 	 		return Matrix<T>(Idx2{},mylambda,n.cols(),m.rows());
@@ -351,11 +363,17 @@ template<typename F>
 			return x;
 		};
 
+		
 	auto mylambda =[&](int i, int k)
 	{
-	auto t1 = std::async(f1, i, k, 0,n.rows()/2);
-	auto t2 = std::async(f1, i, k, n.rows()/2,n.rows());
-		return t1.get()+t2.get();
+		for(int r=0;r<max_num_of_threads;++r){
+				auto it0 = r*n.rows()/p;
+				auto it1 = (r+1)*n.rows()/p;
+			futures[r] = std::async(f1, i, k, it0,it1);
+		}
+		auto parallel_result = std::accumulate(futures.begin(), futures.end(), 0.0, [](double acc, std::future<double>& f){ return acc + f.get();});
+	
+				return parallel_result;
 	};
 			Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());
 			m=std::move(result);
@@ -384,9 +402,14 @@ template<typename F>
 
 	auto mylambda =[&](int i, int k)
 	{
-	auto t1 = std::async(f1, i, k, 0,n.rows()/2);
-	auto t2 = std::async(f1, i, k, n.rows()/2,n.rows());
-		return t1.get()+t2.get();
+		for(int r=0;r<max_num_of_threads;++r){
+				auto it0 = r*n.rows()/p;
+				auto it1 = (r+1)*n.rows()/p;
+			futures[r] = std::async(f1, i, k, it0,it1);
+		}
+		auto parallel_result = std::accumulate(futures.begin(), futures.end(), 0.0, [](double acc, std::future<double>& f){ return acc + f.get();});
+	
+				return parallel_result;
 	};
 
 	Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());	
@@ -417,9 +440,14 @@ template<typename F>
 
 	auto mylambda =[&](int i, int k)
 	{
-	auto t1 = std::async(f1, i, k, 0,n.rows()/2);
-	auto t2 = std::async(f1, i, k, n.rows()/2,n.rows());
-		return t1.get()+t2.get();
+		for(int r=0;r<max_num_of_threads;++r){
+				auto it0 = r*n.rows()/p;
+				auto it1 = (r+1)*n.rows()/p;
+			futures[r] = std::async(f1, i, k, it0,it1);
+		}
+		auto parallel_result = std::accumulate(futures.begin(), futures.end(), 0.0, [](double acc, std::future<double>& f){ return acc + f.get();});
+	
+				return parallel_result;
 	};
 
 			Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());

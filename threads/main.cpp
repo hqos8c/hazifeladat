@@ -628,7 +628,7 @@ int main()
 }
    std::cout<<"so far so good"<<std::endl;
 
-{
+/*{
     std::ofstream ofile("new_time.txt");
     
     std::vector<double> data(100);
@@ -658,6 +658,6 @@ int main()
         double a  = *std::min_element(std::begin(data),std::end(data));
         ofile << j << " " << a<< std::endl;
         }
-}
-
+    }
+*/
 }
