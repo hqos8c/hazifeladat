@@ -330,7 +330,7 @@ template<typename F>
 
 	auto mylambda =[&](int i, int k)
 	{
-		for(int r=0;r<max_num_of_threads;++r){
+		for(int r=0;r<p;++r){
 				auto it0 = r*n.rows()/p;
 				auto it1 = (r+1)*n.rows()/p;
 			futures[r] = std::async(f1, i, k, it0,it1);
@@ -366,7 +366,7 @@ template<typename F>
 		
 	auto mylambda =[&](int i, int k)
 	{
-		for(int r=0;r<max_num_of_threads;++r){
+		for(int r=0;r<p;++r){
 				auto it0 = r*n.rows()/p;
 				auto it1 = (r+1)*n.rows()/p;
 			futures[r] = std::async(f1, i, k, it0,it1);
@@ -402,7 +402,7 @@ template<typename F>
 
 	auto mylambda =[&](int i, int k)
 	{
-		for(int r=0;r<max_num_of_threads;++r){
+		for(int r=0;r<p;++r){
 				auto it0 = r*n.rows()/p;
 				auto it1 = (r+1)*n.rows()/p;
 			futures[r] = std::async(f1, i, k, it0,it1);
@@ -440,7 +440,7 @@ template<typename F>
 
 	auto mylambda =[&](int i, int k)
 	{
-		for(int r=0;r<max_num_of_threads;++r){
+		for(int r=0;r<p;++r){
 				auto it0 = r*n.rows()/p;
 				auto it1 = (r+1)*n.rows()/p;
 			futures[r] = std::async(f1, i, k, it0,it1);
