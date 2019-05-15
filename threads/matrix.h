@@ -27,13 +27,6 @@ template<typename M1, typename M2, typename M3, typename F>
  auto add = [](auto const& x, auto const& y){ return x + y; };
  auto sub = [](auto const& x, auto const& y){ return x - y; };
 
-
-int max_num_of_threads = (int)std::thread::hardware_concurrency;
-auto p = std::thread::hardware_concurrency();
-std::vector<std::future<double>> futures(p);
-
-
-
 struct Idx1{};
 struct Idx2{};
 
@@ -319,7 +312,7 @@ template<typename F>
 		if(m.cols()==n.rows()){
 
 	auto f1 = [&](int i, int k,int first, int last)
-		{ 
+		{		
 			double x = 0.0;
 			for(int j=first;j<last;j++)
 			{
@@ -328,9 +321,17 @@ template<typename F>
 			return x;
 		};
 
+
+		
 	auto mylambda =[&](int i, int k)
 	{
-		for(int r=0;r<p;++r){
+
+		int max_num_of_threads = (int)std::thread::hardware_concurrency();
+		auto p = std::thread::hardware_concurrency();
+		std::vector<std::future<double>> futures(p);
+
+
+		for(int r=0;r<max_num_of_threads;++r){
 				auto it0 = r*n.rows()/p;
 				auto it1 = (r+1)*n.rows()/p;
 			futures[r] = std::async(f1, i, k, it0,it1);
@@ -366,7 +367,10 @@ template<typename F>
 		
 	auto mylambda =[&](int i, int k)
 	{
-		for(int r=0;r<p;++r){
+		int max_num_of_threads = (int)std::thread::hardware_concurrency();
+		auto p = std::thread::hardware_concurrency();
+		std::vector<std::future<double>> futures(p);
+		for(int r=0;r<max_num_of_threads;++r){
 				auto it0 = r*n.rows()/p;
 				auto it1 = (r+1)*n.rows()/p;
 			futures[r] = std::async(f1, i, k, it0,it1);
@@ -400,9 +404,14 @@ template<typename F>
 			return x;
 		};
 
+
+
 	auto mylambda =[&](int i, int k)
 	{
-		for(int r=0;r<p;++r){
+		int max_num_of_threads = (int)std::thread::hardware_concurrency();
+		auto p = std::thread::hardware_concurrency();
+		std::vector<std::future<double>> futures(p);
+		for(int r=0;r<max_num_of_threads;++r){
 				auto it0 = r*n.rows()/p;
 				auto it1 = (r+1)*n.rows()/p;
 			futures[r] = std::async(f1, i, k, it0,it1);
@@ -440,7 +449,10 @@ template<typename F>
 
 	auto mylambda =[&](int i, int k)
 	{
-		for(int r=0;r<p;++r){
+		int max_num_of_threads = (int)std::thread::hardware_concurrency();
+		auto p = std::thread::hardware_concurrency();
+		std::vector<std::future<double>> futures(p);
+		for(int r=0;r<max_num_of_threads;++r){
 				auto it0 = r*n.rows()/p;
 				auto it1 = (r+1)*n.rows()/p;
 			futures[r] = std::async(f1, i, k, it0,it1);
@@ -450,6 +462,8 @@ template<typename F>
 				return parallel_result;
 	};
 
+
+		
 			Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());
 			n=std::move(result);
 			return std::move(n);
