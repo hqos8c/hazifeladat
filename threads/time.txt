@@ -1,0 +1,1 @@
+ the matrix size, where the paralell method is faster than the normal is: 1800 and the execution time was: 23138.3milisec

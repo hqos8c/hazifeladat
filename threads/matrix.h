@@ -6,7 +6,6 @@
 #include <cmath>
 #include <ostream>
 #include <istream>
-#include <future>
 
 namespace detail
 {
@@ -309,37 +308,16 @@ template<typename F>
 	template<typename T>
 	Matrix<T> operator*(Matrix<T> const& m,Matrix<T> const& n)
 	{
-		if(m.cols()==n.rows()){
-
-	auto f1 = [&](int i, int k,int first, int last)
-		{		
+		if(m.cols()==n.rows()){		
+		auto mylambda = [&](int i, int k)
+		{ 
 			double x = 0.0;
-			for(int j=first;j<last;j++)
+			for(int j=0;j<n.rows();j++)
 			{
 				x += m(i,j)*n(j,k);
 			}	
 			return x;
 		};
-
-
-		
-	auto mylambda =[&](int i, int k)
-	{
-
-		int max_num_of_threads = (int)std::thread::hardware_concurrency();
-		auto p = std::thread::hardware_concurrency();
-		std::vector<std::future<double>> futures(p);
-
-
-		for(int r=0;r<max_num_of_threads;++r){
-				auto it0 = r*n.rows()/p;
-				auto it1 = (r+1)*n.rows()/p;
-			futures[r] = std::async(f1, i, k, it0,it1);
-		}
-		auto parallel_result = std::accumulate(futures.begin(), futures.end(), 0.0, [](double acc, std::future<double>& f){ return acc + f.get();});
-	
-				return parallel_result;
-	};
 
 	 		return Matrix<T>(Idx2{},mylambda,n.cols(),m.rows());
 		}
@@ -348,37 +326,25 @@ template<typename F>
 			std::cout<<"these matrixes cannot be multiplied";
 			exit(-1);
 		}
+		
+	
 	}
 
 	template<typename T>
 	Matrix<T>&& operator*(Matrix<T>&& m,Matrix<T> const& n)
 	{
 		if(m.cols()==n.rows()){
-		auto f1 = [&](int i, int k,int first, int last)
+		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
-			for(int j=first;j<last;j++)
+			for(int j=0;j<m.cols();j++)
 			{
 				x += m(i,j)*n(j,k);
 			}	
 			return x;
 		};
 
-		
-	auto mylambda =[&](int i, int k)
-	{
-		int max_num_of_threads = (int)std::thread::hardware_concurrency();
-		auto p = std::thread::hardware_concurrency();
-		std::vector<std::future<double>> futures(p);
-		for(int r=0;r<max_num_of_threads;++r){
-				auto it0 = r*n.rows()/p;
-				auto it1 = (r+1)*n.rows()/p;
-			futures[r] = std::async(f1, i, k, it0,it1);
-		}
-		auto parallel_result = std::accumulate(futures.begin(), futures.end(), 0.0, [](double acc, std::future<double>& f){ return acc + f.get();});
-	
-				return parallel_result;
-	};
+
 			Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());
 			m=std::move(result);
 			return std::move(m);
@@ -394,32 +360,15 @@ template<typename F>
 	Matrix<T>&& operator*(Matrix<T> const& m,Matrix<T>&& n)
 	{
 		if(m.cols()==n.rows()){
-		auto f1 = [&](int i, int k,int first, int last)
+		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
-			for(int j=first;j<last;j++)
+			for(int j=0;j<m.cols();j++)
 			{
 				x += m(i,j)*n(j,k);
 			}	
 			return x;
 		};
-
-
-
-	auto mylambda =[&](int i, int k)
-	{
-		int max_num_of_threads = (int)std::thread::hardware_concurrency();
-		auto p = std::thread::hardware_concurrency();
-		std::vector<std::future<double>> futures(p);
-		for(int r=0;r<max_num_of_threads;++r){
-				auto it0 = r*n.rows()/p;
-				auto it1 = (r+1)*n.rows()/p;
-			futures[r] = std::async(f1, i, k, it0,it1);
-		}
-		auto parallel_result = std::accumulate(futures.begin(), futures.end(), 0.0, [](double acc, std::future<double>& f){ return acc + f.get();});
-	
-				return parallel_result;
-	};
 
 	Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());	
 	n=std::move(result);
@@ -430,6 +379,8 @@ template<typename F>
 			std::cout<<"these matrixes cannot be multiplied";
 			exit(-1);
 		}
+
+
 	}
 
 	template<typename T>
@@ -437,33 +388,16 @@ template<typename F>
 	{
 		if(m.cols()==n.rows())
 		{
-		auto f1 = [&](int i, int k,int first, int last)
+		auto mylambda = [&](int i, int k)
 		{ 
 			double x = 0.0;
-			for(int j=first;j<last;j++)
+			for(int j=0;j<m.cols();j++)
 			{
 				x += m(i,j)*n(j,k);
 			}	
 			return x;
 		};
 
-	auto mylambda =[&](int i, int k)
-	{
-		int max_num_of_threads = (int)std::thread::hardware_concurrency();
-		auto p = std::thread::hardware_concurrency();
-		std::vector<std::future<double>> futures(p);
-		for(int r=0;r<max_num_of_threads;++r){
-				auto it0 = r*n.rows()/p;
-				auto it1 = (r+1)*n.rows()/p;
-			futures[r] = std::async(f1, i, k, it0,it1);
-		}
-		auto parallel_result = std::accumulate(futures.begin(), futures.end(), 0.0, [](double acc, std::future<double>& f){ return acc + f.get();});
-	
-				return parallel_result;
-	};
-
-
-		
 			Matrix<T> result(Idx2{},mylambda,n.cols(),m.rows());
 			n=std::move(result);
 			return std::move(n);
