@@ -1,5 +1,0 @@
-using 1 thread:
-108753
-
-using paralell threads:
-68021.3
