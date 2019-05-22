@@ -10,8 +10,8 @@
 #include <algorithm>
 #include <future>
 
-double paralell_mult(Matrix<double> m,Matrix<double> n, Matrix<double> res){
-    auto mylambda=[](Matrix<double> const& m, Matrix<double> const& n,Matrix<double> res,int first, int last){
+double paralell_mult(Matrix<double> const& m,Matrix<double> const& n, Matrix<double>& res){
+    auto mylambda=[&res](Matrix<double> const& m, Matrix<double> const& n,int first, int last){
         for(int i=first;i<last;i++){
             for(int k=0;k<m.cols();k++){
                 for(int j = 0;j<n.rows();j++){
@@ -19,14 +19,13 @@ double paralell_mult(Matrix<double> m,Matrix<double> n, Matrix<double> res){
                 }
             }        
         }
-    return res;
     };
     auto time_1 = std::chrono::high_resolution_clock::now();
 
-    auto t1 = std::async(mylambda,m,n,res,0,m.cols()/3);
-    auto t2 = std::async(mylambda,m,n,res,m.cols()/3,2*m.cols()/3);
-    auto t3 = std::async(mylambda,m,n,res,2*m.cols()/3,m.cols());
-    res =t1.get() +t2.get() +t3.get();
+    auto t1 = std::async(mylambda,m,n,0,m.cols()/3);
+    auto t2 = std::async(mylambda,m,n,m.cols()/3,2*m.cols()/3);
+    auto t3 = std::async(mylambda,m,n,2*m.cols()/3,m.cols());
+    t1.get();t2.get();t3.get();
 
     auto time_2 = std::chrono::high_resolution_clock::now();
     double x =(static_cast<std::chrono::duration<double, std::milli>>(time_2-time_1)).count();
@@ -47,7 +46,13 @@ int main()
     Matrix<double>  M(n,n,v);
     std::vector<double> zero ={0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
     Matrix<double> N(n,n,zero);
-    paralell_mult(M,M,N);
+    double a= paralell_mult(M,M,N);
+    M=M*M;
+    for(int i= 0; i<M.size();i++){
+        if(std::abs(N[i]-M[i])>0.00001){ std::cout<<"problem found"<<std::endl;exit(-1);}
+        else{std::cout<<"the resoult is good"<<std::endl;}
+    }
+
 }
 
 {
@@ -700,7 +705,7 @@ int main()
             first = *std::min_element(std::begin(data_1),std::end(data_1));
         j+=300;
     }
-    ofile<<" the matrix size, where the paralell method is faster than the normal is: "<<j<<" and the execution time was: "<< second<<"sec"<<std::endl;
+    ofile<<" the matrix size, where the paralell method is faster than the normal is: "<<j<<" and the execution time was: "<< second<<"milisec"<<std::endl;
 }
 
 }
