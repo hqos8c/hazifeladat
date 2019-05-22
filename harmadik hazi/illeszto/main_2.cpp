@@ -3,9 +3,6 @@
 #include <vector>
 #include <numeric>
 #include <array>
-#include <future>
-#include <execution>
-
 
 std::pair<double,double> frame (std::vector<double> const& X,std::vector<double> const& Y){
 
