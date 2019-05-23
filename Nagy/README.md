@@ -8,7 +8,7 @@ Fájlok beolvasása egy txt-ből, az adatok rendszerezése, statisztikák kész�
 A programot c++ nyelvben írtam, Visual Studio segítségével
 Ajánlott fordító csomag:
 
-- Mingw (ezen a nyelven íródott)
+- GCC (for mingw)
 - CMake 3.0.0 vagy újabb változatai
 
 ## A programot készítette:
