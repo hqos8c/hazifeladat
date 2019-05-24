@@ -9,7 +9,7 @@ std::pair<double,double> frame (std::vector<double> const& X,std::vector<double>
 
     Vector2<double> start={0.0,0.0};
 
-    auto second = [](Vector2<double> const& v, Vector2<double> & old){
+    auto second = [](Vector2<double> const& v, Vector2<double> const& old){
         return old+v;
         };
     auto sq = [] (double x){return x*x;};
